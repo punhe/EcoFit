@@ -181,13 +181,6 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                 </div>
               </div>
               <div className="product-form-field">
-                <FieldArray
-                  name="availableColors"
-                  disabled={isLoading}
-                  component={CustomColorInput}
-                />
-              </div>
-              <div className="product-form-field">
                 <span className="d-block padding-s">Image Collection</span>
                 {!isFileLoading && (
                   <label htmlFor="product-input-file-collection">
