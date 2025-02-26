@@ -1,118 +1,65 @@
-# MERN Ecommerce
+# Salinaka | E-commerce react app
+Simple ecommerce react js app with firebase [typescript].
+![Firebase Deploy](https://github.com/jgudo/ecommerce-react/workflows/Firebase%20Deploy/badge.svg)
 
-## Description
+### [Live demo](https://salinaka-ecommerce.web.app/)
 
-An ecommerce store built with MERN stack, and utilizes third party API's. This ecommerce store enable three main different flows or implementations:
+![Salinaka screenshot](https://raw.githubusercontent.com/jgudo/ecommerce-react/master/static/screeny1.png)
+![Salinaka screenshot](https://raw.githubusercontent.com/jgudo/ecommerce-react/master/static/screeny2.png)
+![Salinaka screenshot](https://raw.githubusercontent.com/jgudo/ecommerce-react/master/static/screeny3.png)
+![Salinaka screenshot](https://raw.githubusercontent.com/jgudo/ecommerce-react/master/static/screeny7.png)
 
-1. Buyers browse the store categories, products and brands
-2. Sellers or Merchants manage their own brand component
-3. Admins manage and control the entire store components 
-
-### Features:
-
-  * Node provides the backend environment for this application
-  * Express middleware is used to handle requests, routes
-  * Mongoose schemas to model the application data
-  * React for displaying UI components
-  * Redux to manage application's state
-  * Redux Thunk middleware to handle asynchronous redux actions
-
-## Demo
-
-This application is deployed on Vercel Please check it out :smile: [here](https://mern-store-gold.vercel.app).
-
-See admin dashboard [demo](https://mernstore-bucket.s3.us-east-2.amazonaws.com/admin.mp4)
-
-## Docker Guide
-
-To run this project locally you can use docker compose provided in the repository. Here is a guide on how to run this project locally using docker compose.
-
-Clone the repository
-```
-git clone https://github.com/mohamedsamara/mern-ecommerce.git
+## Run Locally
+### 1. Install Dependencies
+```sh
+$ yarn install
 ```
 
-Edit the dockercompose.yml file and update the the values for MONGO_URI and JWT_SECRET
+### 2. Create a new firebase project
+Login to your google account and create a new firebase project [here](https://console.firebase.google.com/u/0/)
 
-Then simply start the docker compose:
-
-```
-docker-compose build
-docker-compose up
-```
-
-## Database Seed
-
-* The seed command will create an admin user in the database
-* The email and password are passed with the command as arguments
-* Like below command, replace brackets with email and password. 
-* For more information, see code [here](server/utils/seed.js)
+Create an `.env` file and add the following variables.
 
 ```
-npm run seed:db [email-***@****.com] [password-******] // This is just an example.
+// SAMPLE CONFIG .env, you should put the actual config details found on your project settings
+
+VITE_FIREBASE_API_KEY=AIzaKJgkjhSdfSgkjhdkKJdkjowf
+VITE_FIREBASE_AUTH_DOMAIN=yourauthdomin.firebaseapp.com
+VITE_FIREBASE_DB_URL=https://yourdburl.firebaseio.com
+VITE_FIREBASE_PROJECT_ID=yourproject-id
+VITE_FIREBASE_STORAGE_BUCKET=yourstoragebucket.appspot.com
+VITE_FIREBASE_MSG_SENDER_ID=43597918523958
+VITE_FIREBASE_APP_ID=234598789798798fg3-034
+
+``` 
+
+After setting up necessary configuration,
+create a **Database** and choose **Cloud Firestore** and start in test mode
+
+### 3. Run development server
+```sh 
+$ yarn dev
 ```
 
-## Install
+---
 
-`npm install` in the project root will install dependencies in both `client` and `server`. [See package.json](package.json)
-
-Some basic Git commands are:
-
-```
-git clone https://github.com/mohamedsamara/mern-ecommerce.git
-cd project
-npm install
+## Build the project
+```sh
+$ yarn build
 ```
 
-## ENV
+## How to add products or perform CRUD operations for Admin
+1. Navigate to your site to `/signup`
+2. Create an account for yourself
+3. Go to your firestore collection `users collection` and edit the account you've just created. Change the role from `USER` to `ADMIN`.
+4. Reload or sigin again to see the changes. 
 
-Create `.env` file for both client and server. See examples:
+**Firebase Admin to be integrated soon**
 
-[Frontend ENV](client/.env.example)
+## Features
 
-[Backend ENV](server/.env.example)
-
-
-## Vercel Deployment
-
-Both frontend and backend are deployed on Vercel from the same repository. When deploying on Vercel, make sure to specifiy the root directory as `client` and `server` when importing the repository. See [client vercel.json](client/vercel.json) and [server vercel.json](server/vercel.json).
-
-## Start development
-
-```
-npm run dev
-```
-
-## Languages & tools
-
-- [Node](https://nodejs.org/en/)
-
-- [Express](https://expressjs.com/)
-
-- [Mongoose](https://mongoosejs.com/)
-
-- [React](https://reactjs.org/)
-
-- [Webpack](https://webpack.js.org/)
-
-
-### Code Formatter
-
-- Add a `.vscode` directory
-- Create a file `settings.json` inside `.vscode`
-- Install Prettier - Code formatter in VSCode
-- Add the following snippet:  
-
-```json
-
-    {
-      "editor.formatOnSave": true,
-      "prettier.singleQuote": true,
-      "prettier.arrowParens": "avoid",
-      "prettier.jsxSingleQuote": true,
-      "prettier.trailingComma": "none",
-      "javascript.preferences.quoteStyle": "single",
-    }
-
-```
+* Admin CRUD operations
+* Firebase authentication
+* Firebase auth provider authentication
+* Account creation and edit
 
