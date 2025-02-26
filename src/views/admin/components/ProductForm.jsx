@@ -20,11 +20,19 @@ const brandOptions = [
   { value: "Giường - tủ", label: "Giường - tủ" },
 ];
 
+const category = [
+  { value: "HY", label: "HY" },
+  { value: "ĐG", label: "ĐG" },
+  { value: "QH", label: "QH" },
+  { value: "TGDC", label: "TGDC" },
+];
+
 const FormSchema = Yup.object().shape({
   name: Yup.string()
     .required("Bắt buộc phải có tên sản phẩm.")
     .max(60, "Product name must only be less than 60 characters."),
   brand: Yup.string(),
+  category: Yup.string().required("Bắt buộc phải có kho sản phẩm."),
   price: Yup.number()
     .positive("Giá không hợp lệ.")
     .integer("Giá không phải là một số nguyên dương.")
@@ -45,6 +53,7 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
   const initFormikValues = {
     name: product?.name || "",
     brand: product?.brand || "",
+    category: product?.category || "",
     price: product?.price || 0,
     maxQuantity: product?.maxQuantity || 0,
     description: product?.description || "",
@@ -114,6 +123,17 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                     label="* Danh mục sản phẩm"
                   />
                 </div>
+              </div>
+              <div className="product-form-field">
+                <CustomCreatableSelect
+                  defaultValue={{ label: values.brand, value: values.brand }}
+                  name="category"
+                  iid="category"
+                  options={category}
+                  disabled={isLoading}
+                  placeholder="Select/Create category"
+                  label="* Kho sản phẩm"
+                />
               </div>
               <div className="product-form-field">
                 <Field
