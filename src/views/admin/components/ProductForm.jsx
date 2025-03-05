@@ -28,11 +28,12 @@ const category = [
 const FormSchema = Yup.object().shape({
   name: Yup.string()
     .required("Bắt buộc phải có tên sản phẩm.")
-    .max(60, "Product name must only be less than 60 characters."),
-  brand: Yup.string(),
-  category: Yup.string().required("Bắt buộc phải có kho sản phẩm."),
     .max(60, "Tên sản phẩm không được vượt quá 60 ký tự."),
-  brand: Yup.string().required("Vui lòng chọn danh mục sản phẩm."),
+  brand: Yup.string()
+    .required("Vui lòng chọn danh mục sản phẩm."),
+  category: Yup.string()
+    .required("Bắt buộc phải có kho sản phẩm.")
+    .max(60, "Tên kho không được vượt quá 60 ký tự."),
   price: Yup.number()
     .positive("Giá không hợp lệ.")
     .integer("Giá phải là một số nguyên dương.")
