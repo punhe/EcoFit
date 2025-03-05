@@ -1,14 +1,12 @@
 import app from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
-import "firebase/storage";
 import firebaseConfig from "./config";
 
 class Firebase {
   constructor() {
     app.initializeApp(firebaseConfig);
 
-    this.storage = app.storage();
     this.db = app.firestore();
     this.auth = app.auth();
   }
@@ -100,7 +98,7 @@ class Firebase {
   setAuthPersistence = () =>
     this.auth.setPersistence(app.auth.Auth.Persistence.LOCAL);
 
-  // // PRODUCT ACTIONS --------------
+  // PRODUCT ACTIONS --------------
 
   getSingleProduct = (id) => this.db.collection("products").doc(id).get();
 
@@ -185,10 +183,8 @@ class Firebase {
             .where("keywords", "array-contains-any", searchKey.split(" "))
             .limit(12);
 
-          // const totalResult = await totalQueryRef.get();
           const nameSnaps = await searchedNameRef.get();
           const keywordsSnaps = await searchedKeywordsRef.get();
-          // const total = totalResult.docs.length;
 
           clearTimeout(timeout);
           if (!didTimeout) {
@@ -248,15 +244,6 @@ class Firebase {
     this.db.collection("products").doc(id).set(product);
 
   generateKey = () => this.db.collection("products").doc().id;
-
-  storeImage = async (id, folder, imageFile) => {
-    const snapshot = await this.storage.ref(folder).child(id).put(imageFile);
-    const downloadURL = await snapshot.ref.getDownloadURL();
-
-    return downloadURL;
-  };
-
-  deleteImage = (id) => this.storage.ref("products").child(id).delete();
 
   editProduct = (id, updates) =>
     this.db.collection("products").doc(id).update(updates);

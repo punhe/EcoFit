@@ -2,8 +2,7 @@
 import { BasketItem, BasketToggle } from '@/components/basket';
 import { Boundary, Modal } from '@/components/common';
 import { CHECKOUT_STEP_1 } from '@/constants/routes';
-import firebase from 'firebase/firebase';
-import { calculateTotal, displayMoney } from '@/helpers/utils';
+import { calculateTotal, formatVND } from '@/helpers/utils';
 import { useDidMount, useModal } from '@/hooks';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -22,14 +21,8 @@ const Basket = () => {
   const didMount = useDidMount();
 
   useEffect(() => {
-    if (didMount && firebase.auth.currentUser && basket.length !== 0) {
-      firebase.saveBasketItems(basket, firebase.auth.currentUser.uid)
-        .then(() => {
-          console.log('Item saved to basket');
-        })
-        .catch((e) => {
-          console.log(e);
-        });
+    if (didMount && basket.length === 0) {
+      onCloseModal();
     }
   }, [basket.length]);
 
@@ -128,9 +121,9 @@ const Basket = () => {
         </div>
         <div className="basket-checkout">
           <div className="basket-total">
-            <p className="basket-total-title">Subtotal Amout:</p>
+            <p className="basket-total-title">Tổng tiền:</p>
             <h2 className="basket-total-amount">
-              {displayMoney(calculateTotal(basket.map((product) => product.price * product.quantity)))}
+              {formatVND(calculateTotal(basket.map((product) => product.price * product.quantity)))}
             </h2>
           </div>
           <button
@@ -139,7 +132,7 @@ const Basket = () => {
             onClick={onCheckOut}
             type="button"
           >
-            Check Out
+            Thanh toán
           </button>
         </div>
       </div>

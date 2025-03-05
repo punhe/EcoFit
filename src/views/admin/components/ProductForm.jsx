@@ -2,13 +2,11 @@
 import { CheckOutlined, LoadingOutlined } from "@ant-design/icons";
 import { ImageLoader } from "@/components/common";
 import {
-  CustomColorInput,
   CustomCreatableSelect,
   CustomInput,
   CustomTextarea,
 } from "@/components/formik";
 import { Field, FieldArray, Form, Formik } from "formik";
-import { useFileHandler } from "@/hooks";
 import PropType from "prop-types";
 import React from "react";
 import * as Yup from "yup";
@@ -23,22 +21,25 @@ const brandOptions = [
 const FormSchema = Yup.object().shape({
   name: Yup.string()
     .required("Bắt buộc phải có tên sản phẩm.")
-    .max(60, "Product name must only be less than 60 characters."),
-  brand: Yup.string(),
+    .max(60, "Tên sản phẩm không được vượt quá 60 ký tự."),
+  brand: Yup.string().required("Vui lòng chọn danh mục sản phẩm."),
   price: Yup.number()
     .positive("Giá không hợp lệ.")
-    .integer("Giá không phải là một số nguyên dương.")
+    .integer("Giá phải là một số nguyên dương.")
+    .min(1000, "Giá tối thiểu là 1.000 VNĐ")
     .required("Bắt buộc phải có giá sản phẩm."),
-  description: Yup.string().required("Description is required."),
+  description: Yup.string().required("Vui lòng nhập mô tả sản phẩm."),
   maxQuantity: Yup.number()
-    .positive("Max quantity is invalid.")
-    .integer("Max quantity should be an integer.")
+    .positive("Số lượng không hợp lệ.")
+    .integer("Số lượng phải là một số nguyên.")
     .required("Bắt buộc phải có số lượng."),
   keywords: Yup.array().of(Yup.string()),
   sizes: Yup.array().of(Yup.number()),
   isFeatured: Yup.boolean(),
   isRecommended: Yup.boolean(),
   availableColors: Yup.array().of(Yup.string().required()),
+  image: Yup.string().required("Vui lòng nhập link ảnh sản phẩm."),
+  imageCollection: Yup.array().of(Yup.string())
 });
 
 const ProductForm = ({ product, onSubmit, isLoading }) => {
@@ -53,31 +54,63 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
     isFeatured: product?.isFeatured || false,
     isRecommended: product?.isRecommended || false,
     availableColors: product?.availableColors || [],
+    image: product?.image || "",
+    imageCollection: product?.imageCollection || []
   };
 
-  const { imageFile, isFileLoading, onFileChange, removeImage } =
-    useFileHandler({
-      image: {},
-      imageCollection: product?.imageCollection || [],
-    });
-
   const onSubmitForm = (form) => {
-    if (imageFile.image.file || product.imageUrl) {
+    if (form.image) {
       onSubmit({
         ...form,
         quantity: 1,
-        // due to firebase function billing policy, let's add lowercase version
-        // of name here instead in firebase functions
         name_lower: form.name.toLowerCase(),
         dateAdded: new Date().getTime(),
-        image: imageFile?.image?.file || product.imageUrl,
-        imageCollection: imageFile.imageCollection,
+        image: form.image,
+        imageCollection: form.imageCollection
       });
     } else {
-      // eslint-disable-next-line no-alert
-      alert("Product thumbnail image is required.");
+      alert("Vui lòng nhập link ảnh sản phẩm.");
     }
   };
+
+  const handleFeaturedChange = (e, setValues, values) => {
+    setValues({ ...values, isFeatured: e.target.checked });
+  };
+
+  const handleRecommendedChange = (e, setValues, values) => {
+    setValues({ ...values, isRecommended: e.target.checked });
+  };
+
+  const renderImageCollection = ({ push, remove }, values) => (
+    <div>
+      {values.imageCollection.map((url, index) => (
+        <div key={`image-${url}-${index}`} className="d-flex">
+          <Field
+            name={`imageCollection.${index}`}
+            type="text"
+            placeholder="https://example.com/image.jpg"
+            component={CustomInput}
+            className="flex-grow-1"
+            label={`Ảnh ${index + 1}`}
+          />
+          <button
+            type="button"
+            onClick={() => remove(index)}
+            className="button button-small"
+          >
+            Xóa
+          </button>
+        </div>
+      ))}
+      <button
+        type="button"
+        onClick={() => push("")}
+        className="button button-small"
+      >
+        Thêm ảnh
+      </button>
+    </div>
+  );
 
   return (
     <div>
@@ -107,10 +140,10 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                   <CustomCreatableSelect
                     defaultValue={{ label: values.brand, value: values.brand }}
                     name="brand"
-                    iid="brand"
+                    id="brand"
                     options={brandOptions}
                     disabled={isLoading}
-                    placeholder="Select/Create Brand"
+                    placeholder="Chọn/Tạo danh mục"
                     label="* Danh mục sản phẩm"
                   />
                 </div>
@@ -132,8 +165,9 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                     name="price"
                     id="price"
                     type="number"
-                    label="* Giá"
+                    label="* Giá (VNĐ)"
                     component={CustomInput}
+                    placeholder="Nhập giá sản phẩm"
                   />
                 </div>
                 &nbsp;
@@ -156,77 +190,45 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                       label: key,
                     }))}
                     name="keywords"
-                    iid="keywords"
+                    id="keywords"
                     isMulti
                     disabled={isLoading}
-                    placeholder="Create/Select Keywords"
+                    placeholder="Tạo/Chọn từ khóa"
                     label="Từ khóa"
                   />
                 </div>
                 &nbsp;
                 <div className="product-form-field">
                   <CustomCreatableSelect
-                    defaultValue={values.keywords.map((key) => ({
-                      value: key,
-                      label: key,
+                    defaultValue={values.sizes.map((size) => ({
+                      value: size,
+                      label: size,
                     }))}
                     name="sizes"
-                    iid="sizes"
+                    id="sizes"
                     type="number"
                     isMulti
                     disabled={isLoading}
-                    placeholder="Create/Select Sizes"
-                    label="Sizes (Millimeter)"
+                    placeholder="Tạo/Chọn kích thước"
+                    label="Kích thước (mm)"
                   />
                 </div>
               </div>
               <div className="product-form-field">
-                <span className="d-block padding-s">Image Collection</span>
-                {!isFileLoading && (
-                  <label htmlFor="product-input-file-collection">
-                    <input
-                      disabled={isLoading}
-                      hidden
-                      id="product-input-file-collection"
-                      multiple
-                      onChange={(e) =>
-                        onFileChange(e, {
-                          name: "imageCollection",
-                          type: "multiple",
-                        })
-                      }
-                      readOnly={isLoading}
-                      type="file"
-                    />
-                    Choose Images
-                  </label>
-                )}
+                <Field
+                  disabled={isLoading}
+                  name="image"
+                  type="text"
+                  label="* Link ảnh chính"
+                  placeholder="https://example.com/image.jpg"
+                  component={CustomInput}
+                />
               </div>
-              <div className="product-form-collection">
-                <>
-                  {imageFile.imageCollection.length >= 1 &&
-                    imageFile.imageCollection.map((image) => (
-                      <div
-                        className="product-form-collection-image"
-                        key={image.id}
-                      >
-                        <ImageLoader alt="" src={image.url} />
-                        <button
-                          className="product-form-delete-image"
-                          onClick={() =>
-                            removeImage({
-                              id: image.id,
-                              name: "imageCollection",
-                            })
-                          }
-                          title="Delete Image"
-                          type="button"
-                        >
-                          <i className="fa fa-times-circle" />
-                        </button>
-                      </div>
-                    ))}
-                </>
+              <div className="product-form-field">
+                <span className="d-block padding-s">Bộ sưu tập ảnh (Links)</span>
+                <FieldArray name="imageCollection">
+                  {(arrayHelpers) => renderImageCollection(arrayHelpers, values)}
+                </FieldArray>
               </div>
               <br />
               <div className="d-flex">
@@ -235,14 +237,12 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                     checked={values.isFeatured}
                     className=""
                     id="featured"
-                    onChange={(e) =>
-                      setValues({ ...values, isFeatured: e.target.checked })
-                    }
+                    onChange={(e) => handleFeaturedChange(e, setValues, values)}
                     type="checkbox"
                   />
                   <label htmlFor="featured">
                     <h5 className="d-flex-grow-1 margin-0">
-                      &nbsp; Add to Featured &nbsp;
+                      &nbsp; Thêm vào sản phẩm nổi bật &nbsp;
                     </h5>
                   </label>
                 </div>
@@ -251,14 +251,12 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                     checked={values.isRecommended}
                     className=""
                     id="recommended"
-                    onChange={(e) =>
-                      setValues({ ...values, isRecommended: e.target.checked })
-                    }
+                    onChange={(e) => handleRecommendedChange(e, setValues, values)}
                     type="checkbox"
                   />
                   <label htmlFor="recommended">
                     <h5 className="d-flex-grow-1 margin-0">
-                      &nbsp; Add to Recommended &nbsp;
+                      &nbsp; Thêm vào sản phẩm đề xuất &nbsp;
                     </h5>
                   </label>
                 </div>
@@ -270,36 +268,21 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                 <button className="button" disabled={isLoading} type="submit">
                   {isLoading ? <LoadingOutlined /> : <CheckOutlined />}
                   &nbsp;
-                  {isLoading ? "Saving Product" : "Save Product"}
+                  {isLoading ? "Đang lưu..." : "Lưu sản phẩm"}
                 </button>
               </div>
             </div>
-            {/* ----THUBMNAIL ---- */}
+            {/* Preview section */}
             <div className="product-form-file">
               <div className="product-form-field">
-                <span className="d-block padding-s">* Thumbnail</span>
-                {!isFileLoading && (
-                  <label htmlFor="product-input-file">
-                    <input
-                      disabled={isLoading}
-                      hidden
-                      id="product-input-file"
-                      onChange={(e) =>
-                        onFileChange(e, { name: "image", type: "single" })
-                      }
-                      readOnly={isLoading}
-                      type="file"
-                    />
-                    Choose Image
-                  </label>
-                )}
+                <span className="d-block padding-s">* Xem trước ảnh</span>
               </div>
               <div className="product-form-image-wrapper">
-                {(imageFile.image.url || product.image) && (
+                {values.image && (
                   <ImageLoader
-                    alt=""
+                    alt="Preview"
                     className="product-form-image-preview"
-                    src={imageFile.image.url || product.image}
+                    src={values.image}
                   />
                 )}
               </div>
@@ -319,10 +302,9 @@ ProductForm.propTypes = {
     maxQuantity: PropType.number,
     description: PropType.string,
     keywords: PropType.arrayOf(PropType.string),
-    imageCollection: PropType.arrayOf(PropType.object),
-    sizes: PropType.arrayOf(PropType.string),
+    imageCollection: PropType.arrayOf(PropType.string),
+    sizes: PropType.arrayOf(PropType.number),
     image: PropType.string,
-    imageUrl: PropType.string,
     isFeatured: PropType.bool,
     isRecommended: PropType.bool,
     availableColors: PropType.arrayOf(PropType.string),

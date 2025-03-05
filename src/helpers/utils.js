@@ -64,3 +64,12 @@ export const displayActionMessage = (msg, status = 'info') => {
     }
   }, 3000);
 };
+
+export const formatVND = (price) => {
+  const formatted = new Intl.NumberFormat('vi-VN', {
+    style: 'decimal',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+  }).format(price);
+  return `${formatted} VND`;
+};

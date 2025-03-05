@@ -1,6 +1,6 @@
 import { CheckOutlined } from '@ant-design/icons';
 import { ImageLoader } from '@/components/common';
-import { displayMoney } from '@/helpers/utils';
+import { formatVND } from '@/helpers/utils';
 import PropType from 'prop-types';
 import React from 'react';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
@@ -55,7 +55,7 @@ const ProductItem = ({ product, isItemOnBasket, addToBasket }) => {
               {product.brand || <Skeleton width={60} />}
             </p>
             <h4 className="product-card-price">
-              {product.price ? displayMoney(product.price) : <Skeleton width={40} />}
+              {product.price ? formatVND(product.price) : <Skeleton width={40} />}
             </h4>
           </div>
         </div>

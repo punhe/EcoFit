@@ -2,7 +2,7 @@ import { ArrowLeftOutlined, LoadingOutlined } from '@ant-design/icons';
 import { ColorChooser, ImageLoader, MessageDisplay } from '@/components/common';
 import { ProductShowcaseGrid } from '@/components/product';
 import { RECOMMENDED_PRODUCTS, SHOP } from '@/constants/routes';
-import { displayMoney } from '@/helpers/utils';
+import { displayActionMessage, formatVND } from '@/helpers/utils';
 import {
   useBasket,
   useDocumentTitle,
@@ -130,7 +130,7 @@ const ViewProduct = () => {
                   />
                 </div>
               )}
-              <h1>{displayMoney(product.price)}</h1>
+              <h1>{formatVND(product.price)}</h1>
               <div className="product-modal-action">
                 <button
                   className={`button button-small ${isItemOnBasket(product.id) ? 'button-border button-border-gray' : ''}`}

@@ -67,25 +67,10 @@ function* productSaga({ type, payload }) {
       try {
         yield initRequest();
 
-        const { imageCollection } = payload;
         const key = yield call(firebase.generateKey);
-        const downloadURL = yield call(firebase.storeImage, key, 'products', payload.image);
-        const image = { id: key, url: downloadURL };
-        let images = [];
-
-        if (imageCollection.length !== 0) {
-          const imageKeys = yield all(imageCollection.map(() => firebase.generateKey));
-          const imageUrls = yield all(imageCollection.map((img, i) => firebase.storeImage(imageKeys[i](), 'products', img.file)));
-          images = imageUrls.map((url, i) => ({
-            id: imageKeys[i](),
-            url
-          }));
-        }
-
         const product = {
           ...payload,
-          image: downloadURL,
-          imageCollection: [image, ...images]
+          id: key
         };
 
         yield call(firebase.addProduct, key, product);
@@ -105,52 +90,11 @@ function* productSaga({ type, payload }) {
       try {
         yield initRequest();
 
-        const { image, imageCollection } = payload.updates;
-        let newUpdates = { ...payload.updates };
-
-        if (image.constructor === File && typeof image === 'object') {
-          try {
-            yield call(firebase.deleteImage, payload.id);
-          } catch (e) {
-            console.error('Failed to delete image ', e);
-          }
-
-          const url = yield call(firebase.storeImage, payload.id, 'products', image);
-          newUpdates = { ...newUpdates, image: url };
-        }
-
-        if (imageCollection.length > 1) {
-          const existingUploads = [];
-          const newUploads = [];
-
-          imageCollection.forEach((img) => {
-            if (img.file) {
-              newUploads.push(img);
-            } else {
-              existingUploads.push(img);
-            }
-          });
-
-          const imageKeys = yield all(newUploads.map(() => firebase.generateKey));
-          const imageUrls = yield all(newUploads.map((img, i) => firebase.storeImage(imageKeys[i](), 'products', img.file)));
-          const images = imageUrls.map((url, i) => ({
-            id: imageKeys[i](),
-            url
-          }));
-          newUpdates = { ...newUpdates, imageCollection: [...existingUploads, ...images] };
-        } else {
-          newUpdates = {
-            ...newUpdates,
-            imageCollection: [{ id: new Date().getTime(), url: newUpdates.image }]
-          };
-          // add image thumbnail to image collection from newUpdates to
-          // make sure you're adding the url not the file object.
-        }
-
-        yield call(firebase.editProduct, payload.id, newUpdates);
+        const { updates } = payload;
+        yield call(firebase.editProduct, payload.id, updates);
         yield put(editProductSuccess({
           id: payload.id,
-          updates: newUpdates
+          updates
         }));
         yield handleAction(ADMIN_PRODUCTS, 'Item succesfully edited', 'success');
         yield put(setLoading(false));

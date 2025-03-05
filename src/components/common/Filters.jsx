@@ -7,6 +7,7 @@ import { useHistory, withRouter } from 'react-router-dom';
 import { applyFilter, resetFilter } from '@/redux/actions/filterActions';
 import { selectMax, selectMin } from '@/selectors/selector';
 import PriceRange from './PriceRange';
+import { formatVND } from '@/helpers/utils';
 
 const Filters = ({ closeModal }) => {
   const { filter, isLoading, products } = useSelector((state) => ({

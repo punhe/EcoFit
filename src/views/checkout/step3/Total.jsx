@@ -1,7 +1,7 @@
 import { ArrowLeftOutlined, CheckOutlined } from '@ant-design/icons';
 import { CHECKOUT_STEP_2 } from '@/constants/routes';
 import { useFormikContext } from 'formik';
-import { displayMoney } from '@/helpers/utils';
+import { formatVND } from '@/helpers/utils';
 import PropType from 'prop-types';
 import React from 'react';
 import { useDispatch } from 'react-redux';
@@ -24,9 +24,9 @@ const Total = ({ isInternational, subtotal }) => {
   return (
     <>
       <div className="basket-total text-right">
-        <p className="basket-total-title">Total:</p>
+        <p className="basket-total-title">Tổng tiền:</p>
         <h2 className="basket-total-amount">
-          {displayMoney(subtotal + (isInternational ? 50 : 0))}
+          {formatVND(subtotal + (isInternational ? 50000 : 0))}
         </h2>
       </div>
       <br />
@@ -38,7 +38,7 @@ const Total = ({ isInternational, subtotal }) => {
         >
           <ArrowLeftOutlined />
           &nbsp;
-          Go Back
+          Quay lại
         </button>
         <button
           className="button"
@@ -48,7 +48,7 @@ const Total = ({ isInternational, subtotal }) => {
         >
           <CheckOutlined />
           &nbsp;
-          Confirm
+          Xác nhận
         </button>
       </div>
     </>
