@@ -8,7 +8,7 @@ import {
 } from "@/components/formik";
 import { Field, FieldArray, Form, Formik } from "formik";
 import PropType from "prop-types";
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import * as Yup from "yup";
 
 const brandOptions = [
@@ -124,6 +124,14 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
       </button>
     </div>
   );
+
+  const isMounted = useRef(true);
+
+  useEffect(() => {
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
 
   return (
     <div>

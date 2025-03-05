@@ -83,6 +83,14 @@ const AppRouter = () => (
           component={view.CheckOutStep3}
           path={ROUTES.CHECKOUT_STEP_3}
         />
+        <ClientRoute
+          component={view.PaymentResult}
+          path={ROUTES.CHECKOUT_SUCCESS}
+        />
+        <ClientRoute
+          component={view.PaymentResult}
+          path={ROUTES.CHECKOUT_CANCEL}
+        />
         <AdminRoute
           component={view.Dashboard}
           exact

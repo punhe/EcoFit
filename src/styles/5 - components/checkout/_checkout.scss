@@ -270,3 +270,32 @@
 .payment-img-discover {
   background-position: 175px 115px;
 }
+
+.checkout-success {
+  width: 50rem;
+  margin: auto;
+  text-align: center;
+  padding: $xl-size;
+
+  .success-icon {
+    color: $green;
+    font-size: 7rem;
+  }
+
+  .error-icon {
+    color: $red;
+    font-size: 7rem;
+  }
+
+  h2 {
+    margin-top: $m-size;
+  }
+
+  p {
+    color: $gray-10;
+  }
+
+  .checkout-success-action {
+    margin-top: $xl-size;
+  }
+}
