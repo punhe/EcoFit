@@ -64,10 +64,14 @@ const Total = ({ isInternational, subtotal }) => {
 
       if (paymentResult?.success && paymentResult?.checkoutUrl) {
         displayActionMessage('Đang chuyển đến trang thanh toán...', 'info');
-        // Short delay to show the message before redirect
-        setTimeout(() => {
-          window.location.href = paymentResult.checkoutUrl;
-        }, 1000);
+        
+        // Create a form and submit it to navigate to PayOS
+        const form = document.createElement('form');
+        form.method = 'GET';
+        form.action = paymentResult.checkoutUrl;
+        form.target = '_self';
+        document.body.appendChild(form);
+        form.submit();
       } else {
         throw new Error('Không nhận được thông tin thanh toán');
       }
