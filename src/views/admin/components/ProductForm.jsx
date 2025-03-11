@@ -16,7 +16,7 @@ const brandOptions = [
   { value: "Đồ nội thất", label: "Đồ nội thất" },
   { value: "Bàn ghế", label: "Bàn ghế" },
   { value: "Giường - tủ", label: "Giường - tủ" },
-  { value: "Đồ Kinh Doanh", label: "Đồ Kinh Doanh" },y
+  { value: "Đồ Kinh Doanh", label: "Đồ Kinh Doanh" },
 ];
 
 const category = [
