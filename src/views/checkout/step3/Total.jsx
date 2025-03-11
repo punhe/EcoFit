@@ -41,37 +41,51 @@ const Total = ({ isInternational, subtotal }) => {
 
       // Ensure each item has valid price and quantity
       const validatedItems = basket.map(item => ({
-        name: item.name,
+        name: String(item.name || ''),
         quantity: Math.max(1, item.quantity || 1), // Ensure minimum quantity of 1
-        price: Math.round(item.price) // Ensure price is a whole number
+        price: Math.round(item.price || 0) // Ensure price is a whole number
       }));
 
-      // Get shipping details from form values
-      const { fullname, email, address, mobile } = values;
+      // Get shipping details from form values and ensure they are strings
+      const { fullname = '', email = '', address = '', mobile = {} } = values || {};
+      const phoneValue = mobile?.value || '';
 
       const paymentResult = await createPayment({
         orderCode,
         amount: totalAmount,
         description: `DH${orderCode}`, // Short description within 25 chars
-        buyerName: fullname,
-        buyerEmail: email,
-        buyerPhone: mobile?.value,
-        buyerAddress: address,
+        buyerName: String(fullname),
+        buyerEmail: String(email),
+        buyerPhone: String(phoneValue),
+        buyerAddress: String(address),
         items: validatedItems,
         expiredAt: Math.floor(Date.now() / 1000) + 3600 // 1 hour from now
       });
 
-      if (paymentResult && paymentResult.success && paymentResult.checkoutUrl) {
+      if (paymentResult?.success && paymentResult?.checkoutUrl) {
         displayActionMessage('Đang chuyển đến trang thanh toán...', 'info');
         // Short delay to show the message before redirect
         setTimeout(() => {
           window.location.href = paymentResult.checkoutUrl;
         }, 1000);
+      } else {
+        throw new Error('Không nhận được thông tin thanh toán');
       }
     } catch (error) {
       console.error('Payment error:', error);
       if (isMounted.current) {
-        displayActionMessage('Có lỗi xảy ra khi tạo thanh toán: ' + error.message, 'error');
+        let errorMessage = 'Lỗi không xác định';
+        
+        // Handle different types of errors
+        if (typeof error === 'string') {
+          errorMessage = error;
+        } else if (error instanceof Error) {
+          errorMessage = error.message || 'Lỗi không xác định';
+        } else if (error && typeof error === 'object') {
+          errorMessage = error.desc || error.message || JSON.stringify(error);
+        }
+        
+        displayActionMessage(`Có lỗi xảy ra khi tạo thanh toán: ${errorMessage}`, 'error');
       }
     } finally {
       if (isMounted.current) {

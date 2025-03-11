@@ -16,7 +16,7 @@ const brandOptions = [
   { value: "Đồ nội thất", label: "Đồ nội thất" },
   { value: "Bàn ghế", label: "Bàn ghế" },
   { value: "Giường - tủ", label: "Giường - tủ" },
-  { value: "Đồ Kinh Doanh", label: "Đồ Kinh Doanh" },
+  { value: "Đồ Kinh Doanh", label: "Đồ Kinh Doanh" },y
 ];
 
 const category = [
@@ -82,7 +82,7 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
         imageCollection: form.imageCollection
       });
     } else {
-      alert("Vui lòng nhập link ảnh sản phẩm.");
+      throw new Error('Không nhận được thông tin thanh toán');
     }
   };
 
