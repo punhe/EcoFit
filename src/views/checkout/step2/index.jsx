@@ -45,21 +45,26 @@ const ShippingDetails = ({ profile, shipping, subtotal }) => {
   const history = useHistory();
 
   const initFormikValues = {
-    fullname: shipping.fullname || profile.fullname || '',
-    email: shipping.email || profile.email || '',
-    address: shipping.address || profile.address || '',
-    mobile: shipping.mobile || profile.mobile || {},
-    isInternational: shipping.isInternational || false,
-    isDone: shipping.isDone || false
+    fullname: shipping?.fullname || profile?.fullname || '',
+    email: shipping?.email || profile?.email || '',
+    address: shipping?.address || profile?.address || '',
+    mobile: shipping?.mobile || profile?.mobile || {
+      country: 'VN',
+      countryCode: 'vn',
+      dialCode: '+84',
+      value: ''
+    },
+    isInternational: shipping?.isInternational || false,
+    isDone: shipping?.isDone || false
   };
 
   const onSubmitForm = (form) => {
     dispatch(setShippingDetails({
-      fullname: form.fullname,
-      email: form.email,
-      address: form.address,
-      mobile: form.mobile,
-      isInternational: form.isInternational,
+      fullname: form.fullname || '',
+      email: form.email || '',
+      address: form.address || '',
+      mobile: form.mobile || {},
+      isInternational: form.isInternational || false,
       isDone: true
     }));
     history.push(CHECKOUT_STEP_3);
@@ -81,10 +86,8 @@ const ShippingDetails = ({ profile, shipping, subtotal }) => {
               <Form>
                 <ShippingForm />
                 <br />
-                {/*  ---- TOTAL --------- */}
                 <ShippingTotal subtotal={subtotal} />
                 <br />
-                {/*  ----- NEXT/PREV BUTTONS --------- */}
                 <div className="checkout-shipping-action">
                   <button
                     className="button button-muted"
@@ -120,7 +123,7 @@ ShippingDetails.propTypes = {
     email: PropType.string,
     address: PropType.string,
     mobile: PropType.object
-  }).isRequired,
+  }),
   shipping: PropType.shape({
     fullname: PropType.string,
     email: PropType.string,
@@ -128,7 +131,34 @@ ShippingDetails.propTypes = {
     mobile: PropType.object,
     isInternational: PropType.bool,
     isDone: PropType.bool
-  }).isRequired
+  })
+};
+
+ShippingDetails.defaultProps = {
+  profile: {
+    fullname: '',
+    email: '',
+    address: '',
+    mobile: {
+      country: 'VN',
+      countryCode: 'vn',
+      dialCode: '+84',
+      value: ''
+    }
+  },
+  shipping: {
+    fullname: '',
+    email: '',
+    address: '',
+    mobile: {
+      country: 'VN',
+      countryCode: 'vn',
+      dialCode: '+84',
+      value: ''
+    },
+    isInternational: false,
+    isDone: false
+  }
 };
 
 export default withCheckout(ShippingDetails);

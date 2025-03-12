@@ -10,9 +10,9 @@ const withCheckout = (Component) => {
     const state = useSelector((store) => ({
       isAuth: !!store.auth.id && !!store.auth.role,
       basket: store.basket,
-      shipping: store.checkout.shipping,
-      payment: store.checkout.payment,
-      profile: store.profile
+      shipping: store.checkout.shipping || {},
+      payment: store.checkout.payment || {},
+      profile: store.profile || {}
     }));
 
     const shippingFee = state.shipping.isInternational ? 50000 : 0;
@@ -22,26 +22,23 @@ const withCheckout = (Component) => {
       return <Redirect to={SIGNIN} />;
     }
     
-    if (state.basket.length === 0) {
+    if (!state.basket || state.basket.length === 0) {
       return <Redirect to="/" />;
     }
-    
-    if (state.isAuth && state.basket.length !== 0) {
-      return (
-        <Component
-          {...props}
-          basket={state.basket}
-          payment={state.payment}
-          profile={state.profile}
-          shipping={state.shipping}
-          subtotal={Number(subtotal + shippingFee)}
-        />
-      );
-    }
-    
-    return null;
+
+    return (
+      <Component
+        {...props}
+        basket={state.basket}
+        payment={state.payment}
+        profile={state.profile}
+        shipping={state.shipping}
+        subtotal={Number(subtotal + shippingFee)}
+      />
+    );
   };
 
+  CheckoutComponent.displayName = `withCheckout(${Component.displayName || Component.name || 'Component'})`;
   return CheckoutComponent;
 };
 
