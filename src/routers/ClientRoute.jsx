@@ -7,12 +7,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Route } from 'react-router-dom';
 
-const PrivateRoute = ({
+const ClientRoute = ({
   isAuth, role, component: Component, ...rest
 }) => (
   <Route
     {...rest}
-    component={(props) => {
+    render={(props) => {
       if (isAuth && role === 'USER') {
         return (
           <main className="content">
@@ -28,7 +28,6 @@ const PrivateRoute = ({
       return (
         <Redirect to={{
           pathname: SIGNIN,
-          // eslint-disable-next-line react/prop-types
           state: { from: props.location }
         }}
         />
@@ -37,22 +36,20 @@ const PrivateRoute = ({
   />
 );
 
-PrivateRoute.defaultProps = {
+ClientRoute.defaultProps = {
   isAuth: false,
   role: 'USER'
 };
 
-PrivateRoute.propTypes = {
+ClientRoute.propTypes = {
   isAuth: PropType.bool,
   role: PropType.string,
-  component: PropType.func.isRequired,
-  // eslint-disable-next-line react/require-default-props
-  rest: PropType.any
+  component: PropType.func.isRequired
 };
 
 const mapStateToProps = ({ auth }) => ({
-  isAuth: !!auth,
-  role: auth?.role || ''
+  isAuth: !!auth.id && !!auth.role,
+  role: auth.role || ''
 });
 
-export default connect(mapStateToProps)(PrivateRoute);
+export default connect(mapStateToProps)(ClientRoute);
