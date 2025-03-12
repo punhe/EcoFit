@@ -1,21 +1,26 @@
 .footer {
   position: relative;
-  padding: 0 $xxl-size;
+  padding: 2rem $xxl-size;
   margin-top: $xl-size;
   background: $off-white;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
 
   @include mobile {
-    padding: 0;
-    padding-top: 2.5rem;
+    padding: 2rem 1rem;
     flex-direction: column;
     text-align: center;
   }
 
   a {
-    text-decoration: underline;
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: darken($off-white, 30%);
+    }
   }
 }
 
@@ -23,10 +28,15 @@
   width: 15rem;
   height: 6rem;
   object-fit: contain;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 }
 
 .footer-col-1 {
-  flex-basis: 40%; 
+  flex-basis: 40%;
 
   @include mobile {
     flex-basis: none;
@@ -39,12 +49,17 @@
   padding: 3rem 0;
   text-align: center;
   flex-basis: 20%;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
 
   @include mobile {
     flex-basis: none;
     order: 3;
-    padding-bottom: 0;
-    margin-bottom: 0;
+    padding: 1.5rem 0;
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    margin: 1rem 0;
   }
 }
 

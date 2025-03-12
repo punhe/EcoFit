@@ -17,6 +17,7 @@ const brandOptions = [
   { value: "Bàn ghế", label: "Bàn ghế" },
   { value: "Giường - tủ", label: "Giường - tủ" },
   { value: "Đồ Kinh Doanh", label: "Đồ Kinh Doanh" },
+  { value: "Khác", label: "Khác" },
 ];
 
 const category = [
@@ -24,14 +25,14 @@ const category = [
   { value: "ĐG", label: "ĐG" },
   { value: "QH", label: "QH" },
   { value: "TGDC", label: "TGDC" },
+  { value: "Khác", label: "Khác" },
 ];
 
 const FormSchema = Yup.object().shape({
   name: Yup.string()
     .required("Bắt buộc phải có tên sản phẩm.")
     .max(60, "Tên sản phẩm không được vượt quá 60 ký tự."),
-  brand: Yup.string()
-    .required("Vui lòng chọn danh mục sản phẩm."),
+  brand: Yup.string().required("Vui lòng chọn danh mục sản phẩm."),
   category: Yup.string()
     .required("Bắt buộc phải có kho sản phẩm.")
     .max(60, "Tên kho không được vượt quá 60 ký tự."),
@@ -51,7 +52,7 @@ const FormSchema = Yup.object().shape({
   isRecommended: Yup.boolean(),
   availableColors: Yup.array().of(Yup.string().required()),
   image: Yup.string().required("Vui lòng nhập link ảnh sản phẩm."),
-  imageCollection: Yup.array().of(Yup.string())
+  imageCollection: Yup.array().of(Yup.string()),
 });
 
 const ProductForm = ({ product, onSubmit, isLoading }) => {
@@ -68,7 +69,7 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
     isRecommended: product?.isRecommended || false,
     availableColors: product?.availableColors || [],
     image: product?.image || "",
-    imageCollection: product?.imageCollection || []
+    imageCollection: product?.imageCollection || [],
   };
 
   const onSubmitForm = (form) => {
@@ -79,10 +80,10 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
         name_lower: form.name.toLowerCase(),
         dateAdded: new Date().getTime(),
         image: form.image,
-        imageCollection: form.imageCollection
+        imageCollection: form.imageCollection,
       });
     } else {
-      throw new Error('Không nhận được thông tin thanh toán');
+      throw new Error("Không nhận được thông tin thanh toán");
     }
   };
 
@@ -257,9 +258,13 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                 />
               </div>
               <div className="product-form-field">
-                <span className="d-block padding-s">Bộ sưu tập ảnh (Links)</span>
+                <span className="d-block padding-s">
+                  Bộ sưu tập ảnh (Links)
+                </span>
                 <FieldArray name="imageCollection">
-                  {(arrayHelpers) => renderImageCollection(arrayHelpers, values)}
+                  {(arrayHelpers) =>
+                    renderImageCollection(arrayHelpers, values)
+                  }
                 </FieldArray>
               </div>
               <br />
@@ -283,7 +288,9 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                     checked={values.isRecommended}
                     className=""
                     id="recommended"
-                    onChange={(e) => handleRecommendedChange(e, setValues, values)}
+                    onChange={(e) =>
+                      handleRecommendedChange(e, setValues, values)
+                    }
                     type="checkbox"
                   />
                   <label htmlFor="recommended">
