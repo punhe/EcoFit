@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import { BasketItem, BasketToggle } from '@/components/basket';
 import { Boundary, Modal } from '@/components/common';
-import { CHECKOUT_STEP_1 } from '@/constants/routes';
+import { CHECKOUT, SIGNIN } from '@/constants/routes';
 import { calculateTotal, formatVND } from '@/helpers/utils';
 import { useDidMount, useModal } from '@/hooks';
 import React, { useEffect } from 'react';
@@ -27,18 +27,19 @@ const Basket = () => {
   }, [basket.length]);
 
   const onCheckOut = () => {
-    if ((basket.length !== 0 && user)) {
+    if (basket.length !== 0 && user) {
       document.body.classList.remove('is-basket-open');
-      history.push(CHECKOUT_STEP_1);
-    } else {
-      onOpenModal();
+      history.push(CHECKOUT);
+    } else if (!user) {
+      document.body.classList.remove('is-basket-open');
+      history.push(SIGNIN);
     }
   };
 
   const onSignInClick = () => {
     onCloseModal();
-    document.body.classList.remove('basket-open');
-    history.push(CHECKOUT_STEP_1);
+    document.body.classList.remove('is-basket-open');
+    history.push(SIGNIN);
   };
 
   const onClearBasket = () => {
@@ -47,13 +48,13 @@ const Basket = () => {
     }
   };
 
-  return user && user.role === 'ADMIN' ? null : (
+  return (
     <Boundary>
       <Modal
         isOpen={isOpenModal}
         onRequestClose={onCloseModal}
       >
-        <p className="text-center">You must sign in to continue checking out</p>
+        <p className="text-center">Bạn cần đăng nhập để thanh toán</p>
         <br />
         <div className="d-flex-center">
           <button
@@ -61,7 +62,7 @@ const Basket = () => {
             onClick={onCloseModal}
             type="button"
           >
-            Continue shopping
+            Tiếp tục mua sắm
           </button>
           &nbsp;
           <button
@@ -69,7 +70,7 @@ const Basket = () => {
             onClick={onSignInClick}
             type="button"
           >
-            Sign in to checkout
+            Đăng nhập
           </button>
         </div>
       </Modal>
@@ -77,12 +78,8 @@ const Basket = () => {
         <div className="basket-list">
           <div className="basket-header">
             <h3 className="basket-header-title">
-              My Basket &nbsp;
-              <span>
-                (
-                {` ${basket.length} ${basket.length > 1 ? 'items' : 'item'}`}
-                )
-              </span>
+              Giỏ hàng &nbsp;
+              <span>({` ${basket.length} ${basket.length > 1 ? 'items' : 'item'}`})</span>
             </h3>
             <BasketToggle>
               {({ onClickToggle }) => (
@@ -91,7 +88,7 @@ const Basket = () => {
                   onClick={onClickToggle}
                   role="presentation"
                 >
-                  Close
+                  Đóng
                 </span>
               )}
             </BasketToggle>
@@ -101,12 +98,12 @@ const Basket = () => {
               onClick={onClearBasket}
               type="button"
             >
-              <span>Clear Basket</span>
+              <span>Xóa giỏ hàng</span>
             </button>
           </div>
           {basket.length <= 0 && (
             <div className="basket-empty">
-              <h5 className="basket-empty-msg">Your basket is empty</h5>
+              <h5 className="basket-empty-msg">Giỏ hàng trống</h5>
             </div>
           )}
           {basket.map((product, i) => (
@@ -128,7 +125,7 @@ const Basket = () => {
           </div>
           <button
             className="basket-checkout-button button"
-            disabled={basket.length === 0 || pathname === '/checkout'}
+            disabled={basket.length === 0 || pathname === CHECKOUT}
             onClick={onCheckOut}
             type="button"
           >
