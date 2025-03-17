@@ -17,6 +17,7 @@ const brandOptions = [
   { value: "Bàn ghế", label: "Bàn ghế" },
   { value: "Giường - tủ", label: "Giường - tủ" },
   { value: "Đồ Kinh Doanh", label: "Đồ Kinh Doanh" },
+  { value: "Kệ ", label: "Kệ" },
   { value: "Khác", label: "Khác" },
 ];
 
