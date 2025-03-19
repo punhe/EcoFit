@@ -3,7 +3,7 @@ import { Router, Switch, Route } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import * as ROUTES from "@/constants/routes";
 
-import { Navigation } from "@/components/common";
+import { Navigation, Footer } from "@/components/common";
 import { Basket } from "@/components/basket";
 import * as view from "@/views";
 import AdminRoute from "./AdminRoute";
@@ -121,6 +121,7 @@ const AppRouter = () => (
       />
       <Route path="*" component={view.PageNotFound} />
     </Switch>
+    <Footer />
   </Router>
 );
 
