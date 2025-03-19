@@ -1,14 +1,14 @@
-import React from 'react';
-import { Router, Switch, Route } from 'react-router-dom';
-import { createBrowserHistory } from 'history';
-import * as ROUTES from '@/constants/routes';
+import React from "react";
+import { Router, Switch, Route } from "react-router-dom";
+import { createBrowserHistory } from "history";
+import * as ROUTES from "@/constants/routes";
 
-import { Navigation } from '@/components/common';
-import { Basket } from '@/components/basket';
-import * as view from '@/views';
-import AdminRoute from './AdminRoute';
-import ClientRoute from './ClientRoute';
-import PublicRoute from './PublicRoute';
+import { Navigation } from "@/components/common";
+import { Basket } from "@/components/basket";
+import * as view from "@/views";
+import AdminRoute from "./AdminRoute";
+import ClientRoute from "./ClientRoute";
+import PublicRoute from "./PublicRoute";
 
 export const history = createBrowserHistory();
 
@@ -17,27 +17,12 @@ const AppRouter = () => (
     <Navigation />
     <Basket />
     <Switch>
-      <Route
-        exact
-        path="/"
-        component={view.Home}
-      />
-      <Route
-        path="/search"
-        component={view.Search}
-      />
-      <Route
-        path="/product/:id"
-        component={view.ViewProduct}
-      />
-      <Route
-        path="/featured"
-        component={view.FeaturedProducts}
-      />
-      <Route
-        path="/recommended"
-        component={view.RecommendedProducts}
-      />
+      <Route exact path="/" component={view.Home} />
+      <Route path="/search" component={view.Search} />
+      <Route path="/product/:id" component={view.ViewProduct} />
+      <Route path="/featured" component={view.FeaturedProducts} />
+      <Route path="/recommended" component={view.RecommendedProducts} />
+      <Route path={ROUTES.SHOP} component={view.Shop} />
       <Route
         path={ROUTES.SIGNIN}
         component={() => (
@@ -134,10 +119,7 @@ const AppRouter = () => (
           </AdminRoute>
         )}
       />
-      <Route
-        path="*"
-        component={view.PageNotFound}
-      />
+      <Route path="*" component={view.PageNotFound} />
     </Switch>
   </Router>
 );
