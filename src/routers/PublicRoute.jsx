@@ -49,7 +49,7 @@ PublicRoute.propTypes = {
 };
 
 const mapStateToProps = ({ auth }) => ({
-  isAuth: !!auth,
+  isAuth: !!auth?.id && !!auth?.role,
   role: auth?.role || ''
 });
 

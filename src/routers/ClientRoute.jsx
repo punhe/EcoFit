@@ -48,8 +48,8 @@ ClientRoute.propTypes = {
 };
 
 const mapStateToProps = ({ auth }) => ({
-  isAuth: !!auth.id && !!auth.role,
-  role: auth.role || ''
+  isAuth: !!auth?.id && !!auth?.role,
+  role: auth?.role || ''
 });
 
 export default connect(mapStateToProps)(ClientRoute);
