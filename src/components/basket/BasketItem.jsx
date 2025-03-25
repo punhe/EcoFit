@@ -35,14 +35,6 @@ const BasketItem = ({ product }) => {
               <h5 className="my-0">{product.quantity}</h5>
             </div>
             <div>
-              <span className="spec-title">Kích thước</span>
-              <h5 className="my-0">
-                {product.selectedSize}
-                {' '}
-                mm
-              </h5>
-            </div>
-            <div>
               <span className="spec-title">Màu sắc</span>
               <div style={{
                 backgroundColor: product.selectedColor || product.availableColors[0],

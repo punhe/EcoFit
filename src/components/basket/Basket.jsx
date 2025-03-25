@@ -79,7 +79,7 @@ const Basket = () => {
           <div className="basket-header">
             <h3 className="basket-header-title">
               Giỏ hàng &nbsp;
-              <span>({` ${basket.length} ${basket.length > 1 ? 'items' : 'item'}`})</span>
+              <span>({` ${basket.length} ${basket.length > 1 ? 'sản phẩm' : 'sản phẩm'}`})</span>
             </h3>
             <BasketToggle>
               {({ onClickToggle }) => (
