@@ -19,7 +19,7 @@ const ViewProduct = () => {
   const { product, isLoading, error } = useProduct(id);
   const { addToBasket, isItemOnBasket } = useBasket(id);
   useScrollTop();
-  useDocumentTitle(`View ${product?.name || "Item"}`);
+  useDocumentTitle(`${product?.name || "Sản phẩm"} | ECOFIT`);
 
   const [selectedImage, setSelectedImage] = useState(product?.image || "");
   const [selectedSize, setSelectedSize] = useState("");
@@ -60,7 +60,7 @@ const ViewProduct = () => {
     <main className="content">
       {isLoading && (
         <div className="loader">
-          <h4>Loading Product...</h4>
+          <h4>Đang tải sản phẩm...</h4>
           <br />
           <LoadingOutlined style={{ fontSize: "3rem" }} />
         </div>
@@ -71,7 +71,7 @@ const ViewProduct = () => {
           <Link to={SHOP}>
             <h3 className="button-link d-inline-flex">
               <ArrowLeftOutlined />
-              &nbsp; Back to shop
+              &nbsp; Quay lại cửa hàng
             </h3>
           </Link>
           <div className="product-modal">
@@ -116,23 +116,9 @@ const ViewProduct = () => {
               <br />
               <div className="divider" />
               <br />
-              <div>
-                <span className="text-subtle">Lens Width and Frame Size</span>
-                <br />
-                <br />
-                <Select
-                  placeholder="--Select Size--"
-                  onChange={onSelectedSizeChange}
-                  options={product.sizes
-                    .sort((a, b) => (a < b ? -1 : 1))
-                    .map((size) => ({ label: `${size} mm`, value: size }))}
-                  styles={{ menu: (provided) => ({ ...provided, zIndex: 10 }) }}
-                />
-              </div>
-              <br />
               {product.availableColors.length >= 1 && (
                 <div>
-                  <span className="text-subtle">Choose Color</span>
+                  <span className="text-subtle">Chọn màu sắc</span>
                   <br />
                   <br />
                   <ColorChooser
@@ -153,22 +139,22 @@ const ViewProduct = () => {
                   type="button"
                 >
                   {isItemOnBasket(product.id)
-                    ? "Remove From Basket"
-                    : "Add To Basket"}
+                    ? "Xóa khỏi giỏ hàng"
+                    : "Thêm vào giỏ hàng"}
                 </button>
               </div>
             </div>
           </div>
           <div style={{ marginTop: "10rem" }}>
             <div className="display-header">
-              <h1>Recommended</h1>
-              <Link to={RECOMMENDED_PRODUCTS}>See All</Link>
+              <h1>Sản phẩm đề xuất</h1>
+              <Link to={RECOMMENDED_PRODUCTS}>Xem tất cả</Link>
             </div>
             {errorFeatured && !isLoadingFeatured ? (
               <MessageDisplay
                 message={error}
                 action={fetchRecommendedProducts}
-                buttonLabel="Try Again"
+                buttonLabel="Thử lại"
               />
             ) : (
               <ProductShowcaseGrid
