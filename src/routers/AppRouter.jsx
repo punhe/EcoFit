@@ -23,101 +23,53 @@ const AppRouter = () => (
       <Route path="/featured" component={view.FeaturedProducts} />
       <Route path="/recommended" component={view.RecommendedProducts} />
       <Route path={ROUTES.SHOP} component={view.Shop} />
-      <Route
+      <PublicRoute
         path={ROUTES.SIGNIN}
-        component={() => (
-          <PublicRoute>
-            <view.SignIn />
-          </PublicRoute>
-        )}
+        component={view.SignIn}
       />
-      <Route
+      <PublicRoute
         path={ROUTES.SIGNUP}
-        component={() => (
-          <PublicRoute>
-            <view.SignUp />
-          </PublicRoute>
-        )}
+        component={view.SignUp}
       />
-      <Route
+      <PublicRoute
         path={ROUTES.FORGOT_PASSWORD}
-        component={() => (
-          <PublicRoute>
-            <view.ForgotPassword />
-          </PublicRoute>
-        )}
+        component={view.ForgotPassword}
       />
-      <Route
+      <ClientRoute
         path={ROUTES.CHECKOUT}
-        component={() => (
-          <ClientRoute>
-            <view.Checkout />
-          </ClientRoute>
-        )}
+        component={view.Checkout}
       />
-      <Route
+      <ClientRoute
         path="/checkout/success"
-        component={() => (
-          <ClientRoute>
-            <view.PaymentResult />
-          </ClientRoute>
-        )}
+        component={view.PaymentResult}
       />
-      <Route
+      <ClientRoute
         path="/checkout/cancel"
-        component={() => (
-          <ClientRoute>
-            <view.PaymentResult />
-          </ClientRoute>
-        )}
+        component={view.PaymentResult}
       />
-      <Route
+      <ClientRoute
         path="/account"
-        component={() => (
-          <ClientRoute>
-            <view.UserAccount />
-          </ClientRoute>
-        )}
+        component={view.UserAccount}
       />
-      <Route
+      <ClientRoute
         path={ROUTES.ACCOUNT_EDIT}
-        component={() => (
-          <ClientRoute>
-            <view.EditAccount />
-          </ClientRoute>
-        )}
+        component={view.EditAccount}
       />
-      <Route
+      <AdminRoute
         path={ROUTES.ADMIN_DASHBOARD}
-        component={() => (
-          <AdminRoute>
-            <view.Dashboard />
-          </AdminRoute>
-        )}
+        component={view.Dashboard}
       />
-      <Route
+      <AdminRoute
         path={ROUTES.ADMIN_PRODUCTS}
-        component={() => (
-          <AdminRoute>
-            <view.Products />
-          </AdminRoute>
-        )}
+        component={view.Products}
       />
-      <Route
+      <AdminRoute
         path={ROUTES.ADD_PRODUCT}
-        component={() => (
-          <AdminRoute>
-            <view.AddProduct />
-          </AdminRoute>
-        )}
+        component={view.AddProduct}
       />
-      <Route
+      <AdminRoute
         path={ROUTES.EDIT_PRODUCT}
-        component={() => (
-          <AdminRoute>
-            <view.EditProduct />
-          </AdminRoute>
-        )}
+        component={view.EditProduct}
       />
       <Route path="*" component={view.PageNotFound} />
     </Switch>
