@@ -118,7 +118,7 @@ const ViewProduct = () => {
               <br />
               {product.availableColors.length >= 1 && (
                 <div>
-                  <span className="text-subtle">Chọn màu sắc</span>
+                  <span className="text-subtle">Chọn màu sắc mà bạn muốn</span>
                   <br />
                   <br />
                   <ColorChooser
@@ -130,11 +130,10 @@ const ViewProduct = () => {
               <h1>{formatVND(product.price)}</h1>
               <div className="product-modal-action">
                 <button
-                  className={`button button-small ${
-                    isItemOnBasket(product.id)
+                  className={`button button-small ${isItemOnBasket(product.id)
                       ? "button-border button-border-gray"
                       : ""
-                  }`}
+                    }`}
                   onClick={handleAddToBasket}
                   type="button"
                 >
