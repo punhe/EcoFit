@@ -1,14 +1,14 @@
-// Vintage Footer Styles
+// Deep Vintage/Retro Footer Styles
 .footer {
   position: relative;
-  padding: 2rem $xxl-size;
+  padding: 2.5rem $xxl-size;
   margin-top: $xl-size;
   background: $vintage-beige;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 -2px 15px rgba(139, 69, 19, 0.08);
-  border-top: 3px solid $vintage-gold;
+  box-shadow: 0 -4px 20px rgba(60, 35, 15, 0.1);
+  border-top: 4px double $vintage-gold;
 
   @include mobile {
     padding: 2rem 1rem;
@@ -20,6 +20,7 @@
     text-decoration: none;
     transition: color 0.3s ease;
     color: $vintage-brown;
+    font-family: $font-body;
 
     &:hover {
       color: $vintage-gold;
@@ -28,15 +29,15 @@
 }
 
 .footer-logo {
-  width: 15rem;
-  height: 6rem;
+  width: 16rem;
+  height: 7rem;
   object-fit: contain;
   transition: transform 0.3s ease;
-  filter: sepia(20%);
+  filter: sepia(30%) contrast(1.1);
 
   &:hover {
     transform: scale(1.05);
-    filter: sepia(0%);
+    filter: sepia(15%);
   }
 }
 
@@ -54,16 +55,16 @@
   padding: 3rem 0;
   text-align: center;
   flex-basis: 20%;
-  border-left: 1px solid $vintage-gold;
-  border-right: 1px solid $vintage-gold;
+  border-left: 2px solid $vintage-gold;
+  border-right: 2px solid $vintage-gold;
 
   @include mobile {
     flex-basis: none;
     order: 3;
     padding: 1.5rem 0;
     border: none;
-    border-top: 1px solid $vintage-gold;
-    border-bottom: 1px solid $vintage-gold;
+    border-top: 2px solid $vintage-gold;
+    border-bottom: 2px solid $vintage-gold;
     margin: 1rem 0;
   }
 }
@@ -89,33 +90,34 @@
   }
 }
 
-// New vintage footer styles
+// New vintage footer styles - Retro poster aesthetic
 .footer-new {
-  background: linear-gradient(180deg, $vintage-brown-dark 0%, #3D2914 100%);
+  background: linear-gradient(180deg, $vintage-coffee 0%, $vintage-brown-dark 50%, #2A1810 100%);
   color: $vintage-cream;
   width: 100%;
-  padding: 5rem 0 1.5rem;
-  margin-top: 5rem;
+  padding: 6rem 0 2rem;
+  margin-top: 6rem;
   font-family: $font-body;
   position: relative;
 
-  // Decorative top border
+  // Decorative top border - Gold strip
   &::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 5px;
-    background: linear-gradient(90deg,
-        transparent 0%,
-        $vintage-gold 20%,
+    height: 8px;
+    background:
+      linear-gradient(90deg,
+        $vintage-worn 0%,
+        $vintage-gold 15%,
         $vintage-gold-light 50%,
-        $vintage-gold 80%,
-        transparent 100%);
+        $vintage-gold 85%,
+        $vintage-worn 100%);
   }
 
-  // Decorative pattern overlay
+  // Decorative pattern overlay - Halftone
   &::after {
     content: '';
     position: absolute;
@@ -123,7 +125,10 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c4a35a' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    background-image:
+      radial-gradient($vintage-gold 1px, transparent 1px);
+    background-size: 4px 4px;
+    opacity: 0.02;
     pointer-events: none;
   }
 }
@@ -146,32 +151,34 @@
 
 .footer-col {
   flex: 1;
-  margin-bottom: 2.5rem;
+  margin-bottom: 3rem;
   min-width: 180px;
-  padding: 0 1.5rem;
+  padding: 0 2rem;
 
   @include mobile {
-    margin-bottom: 3rem;
+    margin-bottom: 3.5rem;
     text-align: center;
   }
 
   h4 {
     font-family: $font-heading;
-    font-size: 1.8rem;
-    margin-bottom: 2rem;
-    font-weight: 600;
+    font-size: 2.2rem;
+    margin-bottom: 2.5rem;
+    font-weight: 700;
     position: relative;
     color: $vintage-gold-light;
-    letter-spacing: $letter-spacing-wide;
+    letter-spacing: $letter-spacing-wider;
     text-transform: uppercase;
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
 
     &:after {
-      content: "✦";
+      content: "— ✦ —";
       position: absolute;
-      bottom: -12px;
+      bottom: -15px;
       left: 0;
-      font-size: 1rem;
+      font-size: 1.2rem;
       color: $vintage-gold;
+      letter-spacing: 0.3rem;
 
       @include mobile {
         left: 50%;
@@ -185,12 +192,12 @@
     padding: 0;
 
     li {
-      margin-bottom: 1.2rem;
+      margin-bottom: 1.4rem;
 
       a {
-        color: rgba($vintage-cream, 0.75);
+        color: rgba($vintage-cream, 0.8);
         text-decoration: none;
-        font-size: 1.4rem;
+        font-size: 1.6rem;
         font-family: $font-body;
         transition: all 0.3s ease;
         position: relative;
@@ -199,7 +206,7 @@
         &::before {
           content: '→';
           position: absolute;
-          left: -20px;
+          left: -25px;
           opacity: 0;
           transition: all 0.3s ease;
           color: $vintage-gold;
@@ -207,7 +214,7 @@
 
         &:hover {
           color: $vintage-gold-light;
-          padding-left: 20px;
+          padding-left: 25px;
 
           &::before {
             opacity: 1;
@@ -223,62 +230,68 @@
   flex: 1.5;
 
   p {
-    color: rgba($vintage-cream, 0.7);
-    margin-bottom: 2rem;
-    line-height: 1.7;
-    font-size: 1.4rem;
+    color: rgba($vintage-cream, 0.75);
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+    font-size: 1.6rem;
     font-family: $font-body;
   }
 
   .subscribe-form {
     display: flex;
     margin-bottom: 2rem;
-    border: 1px solid rgba($vintage-gold, 0.3);
-    border-radius: 4px;
+    border: 3px solid $vintage-gold;
+    border-radius: 0;
     overflow: hidden;
     transition: all 0.3s ease;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
 
     &:focus-within {
-      border-color: $vintage-gold;
-      box-shadow: 0 0 15px rgba($vintage-gold, 0.2);
+      border-color: $vintage-gold-light;
+      box-shadow:
+        4px 4px 0 rgba(0, 0, 0, 0.2),
+        0 0 20px rgba($vintage-gold, 0.3);
     }
 
     input {
       flex: 1;
-      padding: 1.4rem;
+      padding: 1.6rem;
       border: none;
-      background: rgba($white, 0.05);
+      background: rgba($white, 0.08);
       color: $vintage-cream;
-      font-size: 1.4rem;
+      font-size: 1.6rem;
       font-family: $font-body;
 
       &::placeholder {
         color: rgba($vintage-cream, 0.5);
         font-style: italic;
+        font-family: $font-typewriter;
       }
 
       &:focus {
         outline: none;
-        background: rgba($white, 0.08);
+        background: rgba($white, 0.12);
       }
     }
 
     button {
-      padding: 0 2rem;
+      padding: 0 2.5rem;
       background: $vintage-gold;
       color: $vintage-brown-dark;
       border: none;
       border-radius: 0;
       cursor: pointer;
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       font-family: $font-accent;
       font-weight: 700;
-      letter-spacing: $letter-spacing-wide;
+      letter-spacing: $letter-spacing-wider;
       text-transform: uppercase;
       transition: all 0.3s ease;
+      box-shadow: none;
 
       &:hover {
         background: $vintage-gold-light;
+        transform: none;
       }
 
       &::before {
@@ -290,8 +303,8 @@
 
 .social-links {
   display: flex;
-  gap: 1.5rem;
-  margin-top: 2.5rem;
+  gap: 1.8rem;
+  margin-top: 3rem;
 
   @include mobile {
     justify-content: center;
@@ -301,21 +314,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 4rem;
-    height: 4rem;
-    background: rgba($white, 0.05);
+    width: 5rem;
+    height: 5rem;
+    background: rgba($white, 0.08);
     color: $vintage-cream;
-    border: 1px solid rgba($vintage-gold, 0.3);
-    border-radius: 50%;
+    border: 2px solid $vintage-gold;
+    border-radius: 0;
     transition: all 0.3s ease;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
 
     &:hover {
       background: $vintage-gold;
       color: $vintage-brown-dark;
       border-color: $vintage-gold;
-      transform: translateY(-4px) rotate(5deg);
-      box-shadow: 0 8px 20px rgba($vintage-gold, 0.3);
+      transform: translate(-2px, -2px) rotate(5deg);
+      box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.3);
     }
   }
 }
@@ -323,37 +337,39 @@
 .footer-bottom {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2.5rem 2rem;
+  padding: 3rem 2rem;
   text-align: center;
-  border-top: 1px solid rgba($vintage-gold, 0.2);
-  margin-top: 3rem;
+  border-top: 2px solid rgba($vintage-gold, 0.3);
+  margin-top: 4rem;
   position: relative;
   z-index: 1;
 
   // Decorative element
   &::before {
-    content: '✦ ✦ ✦';
+    content: '— ❦ EST. 2024 ❦ —';
     display: block;
     position: absolute;
-    top: -10px;
+    top: -12px;
     left: 50%;
     transform: translateX(-50%);
     background: $vintage-brown-dark;
-    padding: 0 1.5rem;
+    padding: 0 2rem;
     color: $vintage-gold;
-    font-size: 1rem;
-    letter-spacing: 0.5rem;
+    font-size: 1.2rem;
+    font-family: $font-typewriter;
+    letter-spacing: $letter-spacing-wider;
   }
 
   p {
-    font-size: 1.4rem;
-    color: rgba($vintage-cream, 0.6);
-    margin: 0.5rem 0;
+    font-size: 1.5rem;
+    color: rgba($vintage-cream, 0.65);
+    margin: 0.6rem 0;
     font-family: $font-body;
 
     &:first-child {
       font-family: $font-accent;
-      font-size: 1.5rem;
+      font-size: 1.7rem;
+      color: rgba($vintage-cream, 0.8);
     }
   }
 }

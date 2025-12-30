@@ -1,9 +1,12 @@
+// Deep Vintage Auth Styles
 .auth {
-  border: 1px solid $border-color-focus;
+  border: 3px solid $border-color;
   display: flex;
   justify-content: center;
   padding: $l-size;
   padding-top: $m-size;
+  background: linear-gradient(145deg, $vintage-cream 0%, $vintage-parchment 100%);
+  box-shadow: 8px 8px 0 $vintage-worn;
 
   @include tablet {
     flex-direction: column;
@@ -15,13 +18,18 @@
 }
 
 .auth-content {
-  width: 80rem;
+  width: 85rem;
   height: auto;
   margin: auto;
+  background: $white;
+  border: 2px solid $border-color;
+  padding: 3rem;
+  box-shadow: 5px 5px 0 $vintage-worn;
 
   @include mobile {
     width: 100%;
     margin-top: 2rem;
+    padding: 2rem;
   }
 
   .loader {
@@ -31,6 +39,26 @@
 
 .auth-main {
   width: 100%;
+
+  h3 {
+    font-family: $font-heading;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: $heading-color;
+    margin-bottom: 2rem;
+    letter-spacing: $letter-spacing-wide;
+    text-shadow: 2px 2px 0 rgba(255, 255, 255, 0.5);
+    text-align: center;
+
+    &::after {
+      content: '— ❦ —';
+      display: block;
+      margin-top: 1rem;
+      font-size: 1.4rem;
+      color: $vintage-gold;
+      letter-spacing: 0.5rem;
+    }
+  }
 
   @include tablet {
     text-align: center;
@@ -59,10 +87,20 @@
 
 .auth-provider-button {
   width: 100%;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
+  border-radius: 0 !important;
+  border: 2px solid $border-color !important;
+  font-family: $font-body !important;
+  box-shadow: 3px 3px 0 $vintage-worn;
+  transition: all 0.3s ease !important;
+
+  &:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 $vintage-worn;
+  }
 
   & * {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
   }
 
   .anticon {
@@ -84,11 +122,11 @@
   @extend .button;
   background: $color-facebook;
   color: $white;
-  border: 1px solid $color-facebook;
+  border: 2px solid $color-facebook !important;
 
   &:hover {
     background: $color-facebook-hover;
-    border: 1px solid $color-facebook;
+    border: 2px solid $color-facebook !important;
   }
 }
 
@@ -96,11 +134,11 @@
   @extend .button;
   background: $color-github;
   color: $white;
-  border: 1px solid $color-github;
+  border: 2px solid $color-github !important;
 
   &:hover {
     background: $color-github-hover;
-    border: 1px solid $color-github;
+    border: 2px solid $color-github !important;
   }
 }
 
@@ -108,16 +146,17 @@
   @extend .button;
   background: $white;
   color: $gray-01;
-  border: 1px solid $border-color-focus;
+  border: 2px solid $border-color-focus !important;
 
   &:hover {
-    background: $border-color;
-    border: 1px solid $border-color;
+    background: $vintage-cream;
+    border: 2px solid $border-color !important;
   }
 
   span {
     flex-basis: 80%;
     color: $paragraph-color;
+    font-family: $font-body;
   }
 }
 
@@ -132,6 +171,11 @@
     background: $background-color;
     padding: $s-size;
     z-index: 1;
+    font-family: $font-typewriter;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    letter-spacing: $letter-spacing-wider;
+    color: $vintage-coffee;
 
     @include mobile {
       margin: 1rem 0;
@@ -143,12 +187,12 @@
     content: '';
     position: absolute;
     height: 30%;
-    width: 1px;
-    background: $border-color;
+    width: 2px;
+    background: $vintage-gold;
 
     @include tablet {
       width: 50%;
-      height: 1px;
+      height: 2px;
     }
   }
 
@@ -174,6 +218,7 @@
 .auth-action {
   display: flex;
   justify-content: space-between;
+  margin-top: 2rem;
 
   @include tablet {
     flex-direction: column;
@@ -183,6 +228,13 @@
       margin-bottom: 0;
       text-align: center;
       order: 2;
+      font-family: $font-body;
+      font-size: 1.6rem;
+      color: $vintage-brown;
+
+      &:hover {
+        color: $vintage-gold;
+      }
     }
 
     button {
@@ -203,8 +255,10 @@
   padding: $s-size;
   margin: auto;
   background: $background-color-01;
-  border: 1px solid $border-color-focus;
+  border: 2px solid $border-color-focus;
   border-top: none;
+  font-family: $font-body;
+  font-size: 1.5rem;
 }
 
 .auth-info {
@@ -229,38 +283,44 @@
   align-items: center;
 }
 
-// Admin Signup Link
+// Admin Signup Link - Retro style
 .admin-signup-link {
   text-align: center;
-  margin-top: 2rem;
-  padding: 1.5rem;
-  background: linear-gradient(135deg, rgba($vintage-gold, 0.1) 0%, rgba($vintage-gold, 0.05) 100%);
-  border-radius: 8px;
-  border: 1px dashed rgba($vintage-gold, 0.3);
+  margin-top: 2.5rem;
+  padding: 2rem;
+  background: linear-gradient(145deg, rgba($vintage-gold, 0.15) 0%, rgba($vintage-gold, 0.08) 100%);
+  border-radius: 0;
+  border: 3px dashed $vintage-gold;
+  box-shadow: 4px 4px 0 $vintage-worn;
 
   .admin-switch-btn {
     background: transparent;
-    border: 2px solid $vintage-gold;
+    border: 3px solid $vintage-gold;
     color: $vintage-brown;
-    padding: 1rem 2rem;
+    padding: 1.2rem 2.5rem;
     font-family: $font-accent;
-    font-size: 1.4rem;
-    font-weight: 600;
-    border-radius: 6px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    border-radius: 0;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
-    gap: 0.8rem;
+    gap: 1rem;
     transition: all 0.3s ease;
+    letter-spacing: $letter-spacing-wide;
+    text-transform: uppercase;
+    box-shadow: 3px 3px 0 $vintage-coffee;
 
     .anticon {
       color: $vintage-gold;
-      font-size: 1.6rem;
+      font-size: 1.8rem;
     }
 
     &:hover {
       background: $vintage-gold;
       color: $white;
+      transform: translate(-2px, -2px);
+      box-shadow: 5px 5px 0 $vintage-coffee;
 
       .anticon {
         color: $white;
@@ -271,5 +331,44 @@
       opacity: 0.6;
       cursor: not-allowed;
     }
+  }
+}
+
+// Vintage input styling
+.auth-content {
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    font-family: $font-body;
+    font-size: 1.7rem;
+    border: 2px solid $border-color;
+    border-radius: 0;
+    padding: 1.4rem 1.6rem;
+    background: $vintage-cream;
+    transition: all 0.3s ease;
+
+    &:focus {
+      border-color: $vintage-gold;
+      background: $white;
+      box-shadow: 0 0 0 3px rgba($vintage-gold, 0.2);
+    }
+
+    &::placeholder {
+      font-family: $font-typewriter;
+      color: $vintage-worn;
+      font-style: italic;
+    }
+  }
+
+  label {
+    font-family: $font-accent;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: $heading-color;
+    text-transform: uppercase;
+    letter-spacing: $letter-spacing-wide;
+    margin-bottom: 0.8rem;
+    display: block;
   }
 }

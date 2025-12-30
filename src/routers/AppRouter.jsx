@@ -120,6 +120,14 @@ const AppRouter = () => (
           </AdminRoute>
         }
       />
+      <Route
+        path={ROUTES.ADMIN_USERS}
+        element={
+          <AdminRoute>
+            <view.Users />
+          </AdminRoute>
+        }
+      />
       <Route path="*" element={<view.PageNotFound />} />
     </Routes>
     <Footer />

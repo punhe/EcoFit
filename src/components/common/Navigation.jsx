@@ -1,5 +1,5 @@
 /* eslint-disable indent */
-import { FilterOutlined, ShoppingOutlined } from '@ant-design/icons';
+import { FilterOutlined, ShoppingOutlined, DashboardOutlined } from '@ant-design/icons';
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, Button, Badge as NextUIBadge } from '@nextui-org/react';
 import * as ROUTE from '@/constants/routes';
 import logo from '@/images/logo-full.png';
@@ -69,7 +69,8 @@ const Navigation = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  if (store.user && store.user.role === 'ADMIN') {
+  // Ẩn Navigation khi đang ở các trang Admin (route bắt đầu bằng /admin)
+  if (pathname.startsWith('/admin')) {
     return null;
   }
 
@@ -212,6 +213,29 @@ const Navigation = () => {
             )}
           </BasketToggle>
         </NavbarItem>
+
+        {/* Admin Dashboard Button - chỉ hiển thị khi admin ở view user */}
+        {store.user && store.user.role === 'ADMIN' && (
+          <NavbarItem>
+            <Button
+              as={Link}
+              to={ROUTE.ADMIN_DASHBOARD}
+              size="sm"
+              startContent={<DashboardOutlined />}
+              style={{
+                background: 'linear-gradient(135deg, #8B4513 0%, #A0522D 100%)',
+                color: '#fff',
+                fontFamily: "'Cormorant Garamond', Georgia, serif",
+                fontWeight: '600',
+                letterSpacing: '0.05em',
+                textTransform: 'uppercase',
+                boxShadow: '0 2px 8px rgba(139, 69, 19, 0.3)',
+              }}
+            >
+              Admin Panel
+            </Button>
+          </NavbarItem>
+        )}
 
         {store.user ? (
           <NavbarItem>

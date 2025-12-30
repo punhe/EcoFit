@@ -16,27 +16,49 @@ body {
   color: $paragraph-color;
   line-height: $line-height;
 
-  // Subtle paper texture effect
+  // Deep vintage paper texture - aged parchment with stains
   background-image:
-    radial-gradient(ellipse at 100% 0%, rgba(139, 69, 19, 0.03) 0%, transparent 50%),
-    radial-gradient(ellipse at 0% 100%, rgba(196, 163, 90, 0.05) 0%, transparent 50%);
+    // Coffee stain effects
+    radial-gradient(ellipse at 15% 25%, rgba(74, 55, 40, 0.06) 0%, transparent 40%),
+    radial-gradient(ellipse at 85% 75%, rgba(107, 58, 25, 0.04) 0%, transparent 35%),
+    radial-gradient(ellipse at 50% 50%, rgba(139, 69, 19, 0.02) 0%, transparent 60%),
+    // Paper grain texture
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+
+  // Vignette effect - darker edges like old photographs
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse at center, transparent 50%, rgba(44, 24, 16, 0.08) 100%);
+    z-index: 9999;
+  }
 }
 
-// Vintage button styles
+// Deep Vintage button styles
 button {
-  padding: 1.2rem 2.8rem;
-  border-radius: 4px;
-  border: 2px solid $vintage-brown;
+  padding: 1.4rem 3rem;
+  border-radius: 0;
+  border: 3px solid $vintage-brown;
   font-family: $font-accent;
-  font-size: 1.6rem;
-  font-weight: 600;
-  letter-spacing: $letter-spacing-wide;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: $letter-spacing-wider;
   text-transform: uppercase;
   transition: all 0.3s ease;
   background: transparent;
   color: $vintage-brown;
   position: relative;
   overflow: hidden;
+
+  // Vintage worn edge effect
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.3),
+    2px 2px 0 $vintage-coffee;
 
   &::before {
     content: '';
@@ -53,12 +75,21 @@ button {
   &:hover {
     color: $white;
     cursor: pointer;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(139, 69, 19, 0.25);
+    transform: translate(-2px, -2px);
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.3),
+      4px 4px 0 $vintage-coffee;
 
     &::before {
       left: 0;
     }
+  }
+
+  &:active {
+    transform: translate(0, 0);
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.3),
+      2px 2px 0 $vintage-coffee;
   }
 }
 
@@ -70,8 +101,7 @@ button.sign-up {
   &:hover {
     background-color: $vintage-brown-dark;
     border-color: $vintage-brown-dark;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
+    transform: translate(-2px, -2px);
   }
 }
 
@@ -82,18 +112,15 @@ button.sign-in {
 
   &:hover {
     background-color: $vintage-gold-light;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(196, 163, 90, 0.25);
+    transform: translate(-2px, -2px);
   }
 }
 
 button:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.2);
-}
-
-button:active {
-  transform: translateY(0);
+  box-shadow:
+    0 0 0 3px rgba(107, 58, 25, 0.3),
+    2px 2px 0 $vintage-coffee;
 }
 
 p {
@@ -113,7 +140,7 @@ span {
   position: relative;
 }
 
-// Vintage heading styles
+// Vintage heading styles with decorative elements
 h1,
 h2,
 h3,
@@ -123,20 +150,22 @@ h6 {
   font-family: $font-heading;
   color: $heading-color;
   line-height: $line-height-heading;
-  letter-spacing: 0.02em;
+  letter-spacing: $letter-spacing-normal;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 h1 {
-  font-size: 4rem;
+  font-size: 4.5rem;
   font-weight: 700;
+  position: relative;
 
   @media (max-width: $mobile) {
-    font-size: 3rem;
+    font-size: 3.2rem;
   }
 }
 
 h2 {
-  font-size: 3rem;
+  font-size: 3.2rem;
   font-weight: 600;
   position: relative;
 
@@ -147,42 +176,55 @@ h2 {
     &::after {
       content: '';
       position: absolute;
-      bottom: -8px;
+      bottom: -10px;
       left: 50%;
       transform: translateX(-50%);
-      width: 80px;
+      width: 100px;
       height: 3px;
-      background: linear-gradient(90deg, transparent, $vintage-gold, transparent);
+      background:
+        linear-gradient(90deg, transparent 0%, $vintage-gold 20%, $vintage-gold 80%, transparent 100%);
+    }
+
+    &::before {
+      content: '✦';
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: $vintage-gold;
+      font-size: 1.2rem;
     }
   }
 }
 
 h3 {
-  font-size: 2.4rem;
+  font-size: 2.6rem;
   font-weight: 600;
 }
 
 h4 {
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: 500;
 }
 
-// Vintage scrollbar
+// Vintage scrollbar - aged wood/leather look
 body::-webkit-scrollbar {
-  width: 10px;
+  width: 12px;
 }
 
 body::-webkit-scrollbar-track {
   background: $vintage-beige;
+  border-left: 1px solid $vintage-worn;
 }
 
 body::-webkit-scrollbar-thumb {
-  background: $vintage-brown;
-  border-radius: 5px;
+  background: linear-gradient(180deg, $vintage-brown 0%, $vintage-coffee 100%);
+  border-radius: 0;
   border: 2px solid $vintage-beige;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
 
   &:hover {
-    background: $vintage-brown-dark;
+    background: linear-gradient(180deg, $vintage-brown-dark 0%, $vintage-coffee 100%);
   }
 }
 
@@ -196,7 +238,7 @@ body::-webkit-scrollbar-thumb {
   position: relative;
   padding: $top $pad-desktop;
   display: flex;
-  animation: fadeIn 0.5s ease;
+  animation: fadeIn 0.6s ease;
 
   @media (max-width: $mobile) {
     padding: 5rem $m-size;
@@ -230,60 +272,140 @@ body::-webkit-scrollbar-thumb {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 3rem 0;
+  margin: 4rem 0;
 
   &::before,
   &::after {
     content: '';
     flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, $vintage-gold, transparent);
+    height: 2px;
+    background: linear-gradient(90deg, transparent, $vintage-gold, $vintage-worn, $vintage-gold, transparent);
   }
 
   .divider-icon {
-    margin: 0 1.5rem;
+    margin: 0 2rem;
     color: $vintage-gold;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
+    font-family: serif;
   }
 }
 
-// Vintage card style
+// Ornate vintage divider
+.vintage-ornate-divider {
+  text-align: center;
+  margin: 3rem 0;
+  position: relative;
+
+  &::before {
+    content: '❧ ❦ ❧';
+    display: block;
+    color: $vintage-gold;
+    font-size: 2rem;
+    letter-spacing: 2rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  }
+}
+
+// Vintage card style - aged paper look
 .vintage-card {
-  background: $white;
-  border: 1px solid $border-color;
-  border-radius: 8px;
+  background: linear-gradient(145deg, $white 0%, $vintage-cream 100%);
+  border: 2px solid $border-color;
+  border-radius: 0;
+  position: relative;
   box-shadow:
-    0 4px 20px rgba(139, 69, 19, 0.08),
-    inset 0 0 100px rgba(245, 230, 211, 0.3);
+    4px 4px 0 $vintage-worn,
+    inset 0 0 80px rgba(232, 216, 200, 0.4);
   transition: all 0.3s ease;
 
+  // Aged corner effect
+  &::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background:
+      linear-gradient(135deg, rgba(74, 55, 40, 0.1) 0%, transparent 20%),
+      linear-gradient(315deg, rgba(74, 55, 40, 0.08) 0%, transparent 20%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
   &:hover {
-    transform: translateY(-5px);
+    transform: translate(-4px, -4px);
     box-shadow:
-      0 12px 40px rgba(139, 69, 19, 0.15),
-      inset 0 0 100px rgba(245, 230, 211, 0.3);
+      8px 8px 0 $vintage-worn,
+      inset 0 0 80px rgba(232, 216, 200, 0.5);
   }
 }
 
-// Vintage badge
+// Vintage badge - retro label style
 .vintage-badge {
   display: inline-block;
-  padding: 0.4rem 1.2rem;
+  padding: 0.6rem 1.5rem;
   background: $vintage-gold;
   color: $white;
-  font-family: $font-accent;
-  font-size: 1.2rem;
+  font-family: $font-typewriter;
+  font-size: 1.1rem;
   font-weight: 600;
-  letter-spacing: $letter-spacing-wide;
+  letter-spacing: $letter-spacing-wider;
   text-transform: uppercase;
-  border-radius: 2px;
+  border-radius: 0;
+  box-shadow: 2px 2px 0 $vintage-coffee;
+  transform: rotate(-2deg);
+}
+
+// Retro price tag
+.vintage-price-tag {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  background: $vintage-mustard;
+  color: $white;
+  font-family: $font-bold-retro;
+  font-size: 2rem;
+  font-weight: 700;
+  position: relative;
+  clip-path: polygon(10% 0%, 100% 0%, 100% 100%, 10% 100%, 0% 50%);
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    background: $white;
+    border-radius: 50%;
+    box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.3);
+  }
+}
+
+// Vintage stamp effect
+.vintage-stamp {
+  display: inline-block;
+  padding: 1rem 2rem;
+  border: 3px solid $vintage-faded-red;
+  color: $vintage-faded-red;
+  font-family: $font-typewriter;
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: $letter-spacing-wider;
+  transform: rotate(-5deg);
+  opacity: 0.9;
+
+  // Worn stamp effect
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.1'/%3E%3C/svg%3E");
 }
 
 // Fade in animation
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(15px);
   }
 
   to {
@@ -292,12 +414,78 @@ body::-webkit-scrollbar-thumb {
   }
 }
 
-// Sepia image filter for vintage look
+// Sepia image filter for vintage look - stronger effect
 .vintage-image {
-  filter: sepia(15%) contrast(1.05) brightness(0.98);
-  transition: filter 0.3s ease;
+  filter: sepia(25%) contrast(1.1) brightness(0.95) saturate(0.9);
+  transition: filter 0.4s ease;
 
   &:hover {
-    filter: sepia(0%) contrast(1) brightness(1);
+    filter: sepia(10%) contrast(1.05) brightness(1);
   }
+}
+
+// Faded photograph effect
+.vintage-photo {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+      radial-gradient(ellipse at center, transparent 40%, rgba(74, 55, 40, 0.15) 100%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, transparent 20%);
+    pointer-events: none;
+  }
+
+  img {
+    filter: sepia(20%) contrast(1.05) brightness(0.95);
+  }
+}
+
+// Typewriter text effect
+.typewriter-text {
+  font-family: $font-typewriter;
+  letter-spacing: 0.05em;
+  color: $vintage-ink;
+}
+
+// Retro neon glow text
+.retro-glow {
+  text-shadow:
+    0 0 5px $vintage-gold,
+    0 0 10px $vintage-gold,
+    0 0 20px rgba($vintage-gold, 0.5);
+}
+
+// Worn paper texture overlay
+.paper-texture {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 10;
+  }
+}
+
+// Vintage frame
+.vintage-frame {
+  border: 8px solid $vintage-coffee;
+  box-shadow:
+    inset 0 0 0 2px $vintage-gold,
+    inset 0 0 0 4px $vintage-coffee,
+    4px 4px 0 rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  background: $white;
 }

@@ -1,34 +1,37 @@
 // 
-// TYPOGRAPHY --------- VINTAGE & RETRO THEME
+// TYPOGRAPHY --------- VINTAGE & RETRO THEME (1950s-1970s Style)
 //
 
-// Import Google Fonts - Vintage & Retro Collection
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Young+Serif&family=Yellowtail&family=Righteous&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cinzel:wght@400;500;600;700&display=swap');
+// Import Google Fonts - Vintage & Retro Collection with more old-style options
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Young+Serif&family=Yellowtail&family=Righteous&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cinzel:wght@400;500;600;700&family=Special+Elite&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
 
-// Font families - Vintage & Retro Collection
+// Font families - Deep Vintage & Retro Collection
 $font-heading: 'Playfair Display', Georgia, 'Times New Roman', serif;
-$font-body: 'Lora', Georgia, serif;
-$font-accent: 'Cormorant Garamond', Georgia, serif;
+$font-body: 'Crimson Pro', 'Libre Baskerville', Georgia, serif;
+$font-accent: 'Old Standard TT', 'Cormorant Garamond', Georgia, serif;
 $font-display: 'Cinzel', Georgia, serif; // For special headings
 $font-elegant: 'EB Garamond', Georgia, serif; // For elegant text
 
-// Retro Fonts
+// Retro Fonts - Typewriter and 50s-60s Style
 $font-retro: 'Young Serif', Georgia, serif; // Modern retro serif
 $font-script: 'Yellowtail', cursive; // 50s script style
 $font-bold-retro: 'Righteous', cursive; // Bold retro display
+$font-typewriter: 'Special Elite', 'Courier New', monospace; // Old typewriter effect
 
-// Font sizes
-$baseFontSize: 1.6rem;
-$font-small: 1.3rem;
-$font-medium: 1.5rem;
-$font-large: 2.2rem;
-$font-xlarge: 4.5rem;
+// Font sizes - LARGER and more impactful
+$baseFontSize: 1.9rem;
+$font-small: 1.5rem;
+$font-medium: 1.8rem;
+$font-large: 3rem;
+$font-xlarge: 6rem;
+$font-xxlarge: 8rem;
 
-// Line heights
-$line-height: 1.7;
-$line-height-heading: 1.3;
+// Line heights - more relaxed for classic look
+$line-height: 1.85;
+$line-height-heading: 1.2;
 
-// Letter spacing for vintage feel
-$letter-spacing-wide: 0.05em;
-$letter-spacing-wider: 0.1em;
-$letter-spacing-extra: 0.15em;
+// Letter spacing for vintage feel - wider for retro effect
+$letter-spacing-normal: 0.02em;
+$letter-spacing-wide: 0.08em;
+$letter-spacing-wider: 0.15em;
+$letter-spacing-extra: 0.25em;

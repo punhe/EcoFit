@@ -1,70 +1,82 @@
 // 
-// COLORS --------- VINTAGE THEME
+// COLORS --------- DEEP VINTAGE & RETRO THEME
 // 
 
 :root {
-  // Vintage color palette
-  --vintage-cream: #FDF8F3;
-  --vintage-beige: #F5E6D3;
-  --vintage-paper: #EDE4D7;
-  --vintage-brown: #8B4513;
-  --vintage-brown-dark: #5D3A1A;
-  --vintage-sepia: #704214;
-  --vintage-gold: #C4A35A;
-  --vintage-gold-light: #D4B87A;
-  --vintage-rust: #A0522D;
-  --vintage-olive: #556B2F;
+  // Deep Vintage/Retro color palette - More aged and worn
+  --vintage-cream: #F5EBE0;
+  --vintage-beige: #E8D8C8;
+  --vintage-paper: #DDD0C0;
+  --vintage-brown: #6B3A19;
+  --vintage-brown-dark: #3D2210;
+  --vintage-sepia: #5C3317;
+  --vintage-gold: #B8860B;
+  --vintage-gold-light: #DAA520;
+  --vintage-rust: #8B3A3A;
+  --vintage-olive: #4A5D23;
   --vintage-teal: #2F4F4F;
-  --vintage-burgundy: #722F37;
-  
-  --nav-bg: var(--vintage-cream);
-  --nav-bg-scrolled: #fff; 
-  --nav-bg-shadow: 0 5px 15px rgba(139, 69, 19, 0.1);
+  --vintage-burgundy: #5C1A22;
+  --vintage-mustard: #BE8800;
+  --vintage-coffee: #4A3728;
+  --vintage-parchment: #F0E6D8;
+  --vintage-ink: #1C1108;
+  --vintage-faded-red: #A45A52;
+  --vintage-worn: #C4B09C;
+
+  --nav-bg: var(--vintage-parchment);
+  --nav-bg-scrolled: #F5EBE0;
+  --nav-bg-shadow: 0 5px 15px rgba(60, 35, 15, 0.15);
 }
 
-// Main vintage colors
-$vintage-cream: #FDF8F3;
-$vintage-beige: #F5E6D3;
-$vintage-paper: #EDE4D7;
-$vintage-brown: #8B4513;
-$vintage-brown-dark: #5D3A1A;
-$vintage-sepia: #704214;
-$vintage-gold: #C4A35A;
-$vintage-gold-light: #D4B87A;
-$vintage-rust: #A0522D;
-$vintage-olive: #556B2F;
+// Main vintage colors - More retro and aged
+$vintage-cream: #F5EBE0;
+$vintage-beige: #E8D8C8;
+$vintage-paper: #DDD0C0;
+$vintage-brown: #6B3A19;
+$vintage-brown-dark: #3D2210;
+$vintage-sepia: #5C3317;
+$vintage-gold: #B8860B;
+$vintage-gold-light: #DAA520;
+$vintage-rust: #8B3A3A;
+$vintage-olive: #4A5D23;
 $vintage-teal: #2F4F4F;
-$vintage-burgundy: #722F37;
+$vintage-burgundy: #5C1A22;
+$vintage-mustard: #BE8800;
+$vintage-coffee: #4A3728;
+$vintage-parchment: #F0E6D8;
+$vintage-ink: #1C1108;
+$vintage-faded-red: #A45A52;
+$vintage-worn: #C4B09C;
 
-$nav-bg: $vintage-cream;
-$nav-bg-scrolled: #fff;
+$nav-bg: $vintage-parchment;
+$nav-bg-scrolled: $vintage-cream;
 
-$background-color: $vintage-cream;
+$background-color: $vintage-parchment;
 $background-color-01: $vintage-beige;
 
-// Paragraphs - warm brown tones
-$paragraph-color: #5D4E37;
+// Paragraphs - coffee brown tones
+$paragraph-color: #4A3728;
 
-// Heading - deep brown
-$heading-color: #3D2914;
+// Heading - deep ink
+$heading-color: #2C1810;
 
-// Border - soft brown
-$border-color: #D4C4B0;
-$border-color-focus: #B8A690;
+// Border - aged brown
+$border-color: #C4B09C;
+$border-color-focus: #A69378;
 
 // General
 $white: #fff;
 $black: #1a1a1a;
-$off-black: #3D2914;
+$off-black: #2C1810;
 $off-white: $vintage-beige;
-$red: $vintage-rust;
+$red: $vintage-faded-red;
 $green: $vintage-olive;
-$yellow: $vintage-gold;
-$gray-01: #5D4E37;
-$gray-10: #8B7355;
-$gray-20: #B8A690;
+$yellow: $vintage-mustard;
+$gray-01: #4A3728;
+$gray-10: #7D6B5E;
+$gray-20: #A69378;
 
-// Buttons - vintage brown
+// Buttons - deep vintage brown
 $button-color: $vintage-brown;
 $button-hover: $vintage-brown-dark;
 

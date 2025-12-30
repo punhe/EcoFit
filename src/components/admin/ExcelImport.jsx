@@ -34,7 +34,9 @@ const ExcelImport = () => {
       so_luong: 1,
       ghi_chu: 'Có vết phai nhẹ ở cổ áo',
       noi_bat: true,
-      de_xuat: false
+      de_xuat: false,
+      link_anh: 'https://example.com/image1.jpg',
+      link_anh_phu: 'https://example.com/image2.jpg, https://example.com/image3.jpg'
     },
     {
       ten_san_pham: 'Quần jeans Levis 501',
@@ -51,7 +53,9 @@ const ExcelImport = () => {
       so_luong: 1,
       ghi_chu: 'Có vết sờn nhẹ ở gấu',
       noi_bat: false,
-      de_xuat: true
+      de_xuat: true,
+      link_anh: 'https://example.com/jeans1.jpg',
+      link_anh_phu: ''
     },
     {
       ten_san_pham: 'Túi xách Coach vintage',
@@ -68,7 +72,9 @@ const ExcelImport = () => {
       so_luong: 1,
       ghi_chu: '',
       noi_bat: true,
-      de_xuat: true
+      de_xuat: true,
+      link_anh: 'https://example.com/coach1.jpg',
+      link_anh_phu: 'https://example.com/coach2.jpg'
     }
   ];
 
@@ -93,6 +99,8 @@ const ExcelImport = () => {
       { wch: 30 }, // ghi_chu
       { wch: 10 }, // noi_bat
       { wch: 10 }, // de_xuat
+      { wch: 50 }, // link_anh
+      { wch: 80 }, // link_anh_phu
     ];
 
     const wb = XLSX.utils.book_new();
@@ -124,6 +132,8 @@ const ExcelImport = () => {
       { Huong_dan: '• ghi_chu: Ghi chú về khuyết điểm hoặc đặc điểm đặc biệt' },
       { Huong_dan: '• noi_bat: Sản phẩm nổi bật (true/false)' },
       { Huong_dan: '• de_xuat: Sản phẩm đề xuất (true/false)' },
+      { Huong_dan: '• link_anh: Link ảnh chính của sản phẩm (URL đầy đủ)' },
+      { Huong_dan: '• link_anh_phu: Các link ảnh phụ, cách nhau bởi dấu phẩy (,)' },
       { Huong_dan: '' },
       { Huong_dan: '═══════════════════════════════════════════════' },
       { Huong_dan: 'DANH MỤC GỢI Ý:' },
@@ -136,7 +146,11 @@ const ExcelImport = () => {
       { Huong_dan: '• Phụ kiện: Thắt lưng, mũ, khăn, kính...' },
       { Huong_dan: '• Đồ gia dụng: Đồ trang trí, đồ dùng...' },
       { Huong_dan: '' },
-      { Huong_dan: '⚠️ LƯU Ý: Hình ảnh sản phẩm cần được thêm thủ công sau khi import' },
+      { Huong_dan: '⚠️ LƯU Ý HÌNH ẢNH:' },
+      { Huong_dan: '  - Link ảnh phải là URL công khai (có thể truy cập trực tiếp)' },
+      { Huong_dan: '  - Hỗ trợ các định dạng: jpg, jpeg, png, webp, gif' },
+      { Huong_dan: '  - Có thể dùng link từ Google Drive, Imgur, Cloudinary...' },
+      { Huong_dan: '  - Nhiều ảnh phụ cách nhau bởi dấu phẩy (,)' },
     ];
     const wsInstructions = XLSX.utils.json_to_sheet(instructions);
     wsInstructions['!cols'] = [{ wch: 70 }];
@@ -235,6 +249,22 @@ const ExcelImport = () => {
             if (row.chat_lieu) keywords.push(String(row.chat_lieu).toLowerCase());
             keywords.push('vintage', 'secondhand', 'đồ cũ');
 
+            // Parse image URLs
+            let imageUrl = '';
+            let imageCollection = [];
+
+            if (row.link_anh) {
+              imageUrl = String(row.link_anh).trim();
+            }
+
+            if (row.link_anh_phu) {
+              const additionalImages = String(row.link_anh_phu)
+                .split(',')
+                .map(url => url.trim())
+                .filter(url => url.length > 0);
+              imageCollection = additionalImages.map(url => ({ url }));
+            }
+
             // Build product object matching existing schema
             const product = {
               name: String(row.ten_san_pham).trim(),
@@ -247,8 +277,8 @@ const ExcelImport = () => {
               keywords: [...new Set(keywords)], // Remove duplicates
               sizes: sizes,
               availableColors: row.mau_sac ? [String(row.mau_sac).trim()] : ['Mặc định'],
-              imageCollection: [],
-              imageUrl: ''
+              imageCollection: imageCollection,
+              imageUrl: imageUrl
             };
 
             // Dispatch add product action
