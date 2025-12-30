@@ -59,6 +59,8 @@
 @import './5 - components/admin/grid';
 @import './5 - components/admin/product';
 @import './5 - components/sidenavigation';
+@import './5 - components/admin-dashboard';
+@import './5 - components/excel-import';
 // @import './5 - components/admin/user';
 
 // -- Mobile components
@@ -76,6 +78,9 @@
 
 // -- 404
 @import './5 - components/404/page-not-found';
+
+// -- Admin Signup
+@import './5 - components/admin-signup';
 
 
 

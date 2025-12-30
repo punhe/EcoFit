@@ -1,9 +1,62 @@
+// ================================
+// VINTAGE ANIMATIONS
+// ================================
+
 @keyframes fadeIn {
     0% {
         opacity: 0;
     }
+
     100% {
         opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
     }
 }
 
@@ -15,27 +68,30 @@
 
 @keyframes slide-up {
     0% {
-      opacity: 0;
-      transform: translateY(50px);
+        opacity: 0;
+        transform: translateY(50px);
     }
-  
+
     100% {
-      opacity: 1;
-      transform: translateY(0);
+        opacity: 1;
+        transform: translateY(0);
     }
-  }
+}
 
 @keyframes scale {
     0% {
         transform: translate(-50%, -50%) scale(0);
     }
+
     100% {
         transform: translate(-50%, -50%) scale(1);
     }
 }
 
 @keyframes fullWidth {
-    100% { width: 100%; }
+    100% {
+        width: 100%;
+    }
 }
 
 @keyframes slide-down {
@@ -45,5 +101,250 @@
 
     100% {
         transform: translateY(0);
+    }
+}
+
+// Vintage specific animations
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+@keyframes glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 5px rgba($vintage-gold, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 20px rgba($vintage-gold, 0.6);
+    }
+}
+
+@keyframes borderGlow {
+
+    0%,
+    100% {
+        border-color: rgba($vintage-gold, 0.3);
+    }
+
+    50% {
+        border-color: rgba($vintage-gold, 0.8);
+    }
+}
+
+@keyframes typewriter {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+@keyframes rotateIn {
+    0% {
+        transform: rotate(-10deg) scale(0.9);
+        opacity: 0;
+    }
+
+    100% {
+        transform: rotate(0) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.3);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    70% {
+        transform: scale(0.9);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes swingIn {
+    0% {
+        transform: rotateX(-90deg);
+        opacity: 0;
+    }
+
+    100% {
+        transform: rotateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes vintageFade {
+    0% {
+        opacity: 0;
+        filter: sepia(100%) blur(5px);
+    }
+
+    100% {
+        opacity: 1;
+        filter: sepia(0%) blur(0);
+    }
+}
+
+// Animation utility classes
+.animate-fadeIn {
+    animation: fadeIn 0.6s ease forwards;
+}
+
+.animate-fadeInUp {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.animate-fadeInDown {
+    animation: fadeInDown 0.6s ease forwards;
+}
+
+.animate-fadeInLeft {
+    animation: fadeInLeft 0.6s ease forwards;
+}
+
+.animate-fadeInRight {
+    animation: fadeInRight 0.6s ease forwards;
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.animate-glow {
+    animation: glow 2s ease-in-out infinite;
+}
+
+.animate-bounceIn {
+    animation: bounceIn 0.8s ease forwards;
+}
+
+.animate-rotateIn {
+    animation: rotateIn 0.6s ease forwards;
+}
+
+.animate-vintageFade {
+    animation: vintageFade 1s ease forwards;
+}
+
+// Stagger delays
+.delay-100 {
+    animation-delay: 0.1s;
+}
+
+.delay-200 {
+    animation-delay: 0.2s;
+}
+
+.delay-300 {
+    animation-delay: 0.3s;
+}
+
+.delay-400 {
+    animation-delay: 0.4s;
+}
+
+.delay-500 {
+    animation-delay: 0.5s;
+}
+
+.delay-600 {
+    animation-delay: 0.6s;
+}
+
+.delay-700 {
+    animation-delay: 0.7s;
+}
+
+.delay-800 {
+    animation-delay: 0.8s;
+}
+
+// Hover animations
+.hover-float {
+    transition: transform 0.3s ease;
+
+    &:hover {
+        transform: translateY(-5px);
+    }
+}
+
+.hover-scale {
+    transition: transform 0.3s ease;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+}
+
+.hover-glow {
+    transition: box-shadow 0.3s ease;
+
+    &:hover {
+        box-shadow: 0 0 25px rgba($vintage-gold, 0.4);
+    }
+}
+
+.hover-sepia {
+    filter: sepia(20%);
+    transition: filter 0.4s ease;
+
+    &:hover {
+        filter: sepia(0%);
     }
 }

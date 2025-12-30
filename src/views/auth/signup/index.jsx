@@ -4,9 +4,9 @@ import { CustomInput } from '@/components/formik';
 import { SIGNIN } from '@/constants/routes';
 import { Field, Form, Formik } from 'formik';
 import { useDocumentTitle, useScrollTop } from '@/hooks';
-import PropType from 'prop-types';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { signUp } from '@/redux/actions/authActions';
 import { setAuthenticating, setAuthStatus } from '@/redux/actions/miscActions';
 import * as Yup from 'yup';
@@ -24,12 +24,13 @@ const SignInSchema = Yup.object().shape({
     .min(4, 'Name should be at least 4 characters.')
 });
 
-const SignUp = ({ history }) => {
+const SignUp = () => {
   const { isAuthenticating, authStatus } = useSelector((state) => ({
     isAuthenticating: state.app.isAuthenticating,
     authStatus: state.app.authStatus
   }));
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useScrollTop();
   useDocumentTitle('Sign Up | ECOFIT');
@@ -39,7 +40,7 @@ const SignUp = ({ history }) => {
     dispatch(setAuthenticating(false));
   }, []);
 
-  const onClickSignIn = () => history.push(SIGNIN);
+  const onClickSignIn = () => navigate(SIGNIN);
 
   const onFormSubmit = (form) => {
     dispatch(signUp({
@@ -150,12 +151,6 @@ const SignUp = ({ history }) => {
       )}
     </div>
   );
-};
-
-SignUp.propTypes = {
-  history: PropType.shape({
-    push: PropType.func
-  }).isRequired
 };
 
 export default SignUp;

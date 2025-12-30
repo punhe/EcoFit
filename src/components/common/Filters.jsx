@@ -3,7 +3,7 @@ import { useDidMount } from '@/hooks';
 import PropType from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, withRouter } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { applyFilter, resetFilter } from '@/redux/actions/filterActions';
 import { selectMax, selectMin } from '@/selectors/selector';
 import PriceRange from './PriceRange';
@@ -22,7 +22,7 @@ const Filters = ({ closeModal }) => {
     sortBy: filter.sortBy
   });
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const didMount = useDidMount();
 
   const max = selectMax(products);
@@ -30,7 +30,7 @@ const Filters = ({ closeModal }) => {
 
   useEffect(() => {
     if (didMount && window.screen.width <= 480) {
-      history.push('/');
+      navigate('/');
     }
 
     if (didMount && closeModal) closeModal();
@@ -164,4 +164,4 @@ Filters.propTypes = {
   closeModal: PropType.func.isRequired
 };
 
-export default withRouter(Filters);
+export default Filters;

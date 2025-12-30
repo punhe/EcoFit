@@ -25,6 +25,11 @@ export const signUp = (user) => ({
   payload: user
 });
 
+export const signUpAdmin = (user) => ({
+  type: type.SIGNUP_ADMIN,
+  payload: user
+});
+
 export const signInSuccess = (auth) => ({
   type: type.SIGNIN_SUCCESS,
   payload: auth

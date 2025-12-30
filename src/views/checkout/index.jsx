@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { ArrowLeftOutlined, CheckOutlined, LoadingOutlined } from '@ant-design/icons';
@@ -28,7 +28,7 @@ const FormSchema = Yup.object().shape({
 const Checkout = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [isInternational, setIsInternational] = useState(false);
-  const history = useHistory();
+  const navigate = useNavigate();
   const { basket, profile } = useSelector((state) => ({
     basket: state.basket,
     profile: state.profile
@@ -44,7 +44,7 @@ const Checkout = () => {
   const subtotal = calculateTotal(basket.map((product) => product.price * product.quantity));
 
   const onBack = () => {
-    history.push('/');
+    navigate('/');
   };
 
   const handleSubmit = async (values) => {
@@ -109,7 +109,8 @@ const Checkout = () => {
   };
 
   if (!basket || basket.length === 0) {
-    return history.push('/');
+    navigate('/');
+    return null;
   }
 
   return (

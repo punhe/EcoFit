@@ -4,16 +4,16 @@ import { formatVND } from '@/helpers/utils';
 import PropType from 'prop-types';
 import React from 'react';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const ProductItem = ({ product, isItemOnBasket, addToBasket }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const onClickItem = () => {
     if (!product) return;
 
     if (product.id) {
-      history.push(`/product/${product.id}`);
+      navigate(`/product/${product.id}`);
     }
   };
 

@@ -6,7 +6,7 @@ import { ACCOUNT } from '@/constants/routes';
 import PropTypes from 'prop-types';
 import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { signOut } from '@/redux/actions/authActions';
 
 const UserNav = () => {
@@ -90,4 +90,4 @@ UserNav.propType = {
   profile: PropTypes.object.isRequired
 };
 
-export default withRouter(UserNav);
+export default UserNav;

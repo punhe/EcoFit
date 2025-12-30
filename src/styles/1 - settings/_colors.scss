@@ -1,49 +1,77 @@
 // 
-// COLORS ---------
+// COLORS --------- VINTAGE THEME
 // 
 
 :root {
-  --nav-bg: #f8f8f8;
+  // Vintage color palette
+  --vintage-cream: #FDF8F3;
+  --vintage-beige: #F5E6D3;
+  --vintage-paper: #EDE4D7;
+  --vintage-brown: #8B4513;
+  --vintage-brown-dark: #5D3A1A;
+  --vintage-sepia: #704214;
+  --vintage-gold: #C4A35A;
+  --vintage-gold-light: #D4B87A;
+  --vintage-rust: #A0522D;
+  --vintage-olive: #556B2F;
+  --vintage-teal: #2F4F4F;
+  --vintage-burgundy: #722F37;
+  
+  --nav-bg: var(--vintage-cream);
   --nav-bg-scrolled: #fff; 
-  --nav-bg-shadow: 0 5px 10px rgba(0, 0, 0, .02);
+  --nav-bg-shadow: 0 5px 15px rgba(139, 69, 19, 0.1);
 }
 
-$nav-bg: #f8f8f8;
+// Main vintage colors
+$vintage-cream: #FDF8F3;
+$vintage-beige: #F5E6D3;
+$vintage-paper: #EDE4D7;
+$vintage-brown: #8B4513;
+$vintage-brown-dark: #5D3A1A;
+$vintage-sepia: #704214;
+$vintage-gold: #C4A35A;
+$vintage-gold-light: #D4B87A;
+$vintage-rust: #A0522D;
+$vintage-olive: #556B2F;
+$vintage-teal: #2F4F4F;
+$vintage-burgundy: #722F37;
+
+$nav-bg: $vintage-cream;
 $nav-bg-scrolled: #fff;
 
-$background-color: #f9f9f9;
-$background-color-01: #f2f2f2;
+$background-color: $vintage-cream;
+$background-color-01: $vintage-beige;
 
-// Paragraphs
-$paragraph-color: #4a4a4a; // base
+// Paragraphs - warm brown tones
+$paragraph-color: #5D4E37;
 
-// Heading
-$heading-color: #1a1a1a;
+// Heading - deep brown
+$heading-color: #3D2914;
 
-// Border 
-$border-color: #e1e1e1;
-$border-color-focus: #c5c5c5;
+// Border - soft brown
+$border-color: #D4C4B0;
+$border-color-focus: #B8A690;
 
 // General
 $white: #fff;
-$black: #000;
-$off-black: #303030;
-$off-white: #f0f0f0;
-$red: rgba(247, 45, 45, 0.986);
-$green: rgb(59, 150, 32);
-$yellow: rgb(228, 165, 31);
-$gray-01: #3a3a3a;
-$gray-10: #818181;
-$gray-20: #b6b6b6;
+$black: #1a1a1a;
+$off-black: #3D2914;
+$off-white: $vintage-beige;
+$red: $vintage-rust;
+$green: $vintage-olive;
+$yellow: $vintage-gold;
+$gray-01: #5D4E37;
+$gray-10: #8B7355;
+$gray-20: #B8A690;
 
-// Buttons
-$button-color: #101010;
-$button-hover: lighten($button-color, 10%);
+// Buttons - vintage brown
+$button-color: $vintage-brown;
+$button-hover: $vintage-brown-dark;
 
-// Social
-$color-facebook: #0078ff;
-$color-facebook-hover: darken($color-facebook, 5%);
-$color-github: #24292e;
-$color-github-hover: lighten($color-github, 5%);
+// Social - vintage tones
+$color-facebook: $vintage-teal;
+$color-facebook-hover: darken($vintage-teal, 5%);
+$color-github: $vintage-sepia;
+$color-github-hover: lighten($vintage-sepia, 5%);
 
-$color-success: #000;
+$color-success: $vintage-olive;

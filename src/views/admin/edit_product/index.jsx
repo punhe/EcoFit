@@ -3,15 +3,16 @@ import { useDocumentTitle, useProduct, useScrollTop } from '@/hooks';
 import PropType from 'prop-types';
 import React, { lazy, Suspense } from 'react';
 import { useDispatch } from 'react-redux';
-import { Redirect, withRouter } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import { editProduct } from '@/redux/actions/productActions';
 
 const ProductForm = lazy(() => import('../components/ProductForm'));
 
-const EditProduct = ({ match }) => {
+const EditProduct = () => {
   useDocumentTitle('Edit Product | ECOFIT');
   useScrollTop();
-  const { product, error, isLoading } = useProduct(match.params.id);
+  const { id } = useParams();
+  const { product, error, isLoading } = useProduct(id);
   const dispatch = useDispatch();
 
   const onSubmitForm = (updates) => {
@@ -20,7 +21,7 @@ const EditProduct = ({ match }) => {
 
   return (
     <div className="product-form-container">
-      {error && <Redirect to="/dashboard/products" />}
+      {error && <Navigate to="/dashboard/products" replace />}
       <h2>Edit Product</h2>
       {product && (
         <Suspense fallback={(
@@ -42,12 +43,4 @@ const EditProduct = ({ match }) => {
   );
 };
 
-EditProduct.propTypes = {
-  match: PropType.shape({
-    params: PropType.shape({
-      id: PropType.string
-    })
-  }).isRequired
-};
-
-export default withRouter(EditProduct);
+export default EditProduct;

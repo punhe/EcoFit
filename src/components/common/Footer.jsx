@@ -7,7 +7,6 @@ import {
   FaTwitter,
   FaInstagram,
   FaYoutube,
-  FaGlobeAsia,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
@@ -38,13 +37,13 @@ const Footer = () => {
     <footer className="footer-new">
       <div className="footer-content">
         <div className="footer-col">
-          <h4>ECOFIT</h4>
+          <h4>✦ ECOFIT ✦</h4>
           <ul>
             <li>
               <Link to="/">Trang chủ</Link>
             </li>
             <li>
-              <Link to={Route.SHOP}>Sản phẩm</Link>
+              <Link to={Route.SHOP}>Cửa hàng</Link>
             </li>
             <li>
               <Link to={Route.FEATURED_PRODUCTS}>Sản phẩm nổi bật</Link>
@@ -106,11 +105,11 @@ const Footer = () => {
         <div className="footer-col newsletter">
           <h4>Theo dõi chúng tôi</h4>
           <p>
-            Để lại email của bạn để nhận thông tin khuyến mãi và sản phẩm mới
-            nhất
+            Đăng ký để nhận thông tin về những món đồ vintage độc đáo và
+            các ưu đãi đặc biệt từ cửa hàng
           </p>
           <div className="subscribe-form">
-            <input type="email" placeholder="Email của bạn" />
+            <input type="email" placeholder="Email của bạn..." />
             <button>Đăng ký</button>
           </div>
           <div className="social-links">
@@ -151,10 +150,12 @@ const Footer = () => {
       </div>
       <div className="footer-bottom">
         <p>
-          &copy; {new Date().getFullYear()} EcoFit - Thành phố Quy Nhơn - Bình
-          Định. All rights reserved.
+          &copy; {new Date().getFullYear()} EcoFit - Cửa hàng đồ cũ chất lượng
         </p>
-        <p>Email: ecofit.cskh@gmail.com | Phone: 037 957 7352</p>
+        <p>Thành phố Quy Nhơn - Bình Định</p>
+        <p style={{ marginTop: '0.5rem', fontSize: '1.3rem' }}>
+          Email: ecofit.cskh@gmail.com | Phone: 037 957 7352
+        </p>
       </div>
     </footer>
   );

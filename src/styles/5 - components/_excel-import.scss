@@ -1,0 +1,173 @@
+// ================================
+// EXCEL IMPORT STYLES
+// ================================
+
+.excel-import {
+  background: $white;
+  border-radius: 12px;
+  padding: 2.5rem;
+  border: 2px solid rgba($vintage-gold, 0.2);
+  box-shadow: 0 10px 40px rgba(139, 69, 19, 0.08);
+  margin-bottom: 2rem;
+}
+
+.excel-import-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid $border-color;
+
+  .excel-icon {
+    font-size: 4rem;
+    color: #217346; // Excel green
+    background: rgba(33, 115, 70, 0.1);
+    padding: 1.5rem;
+    border-radius: 12px;
+  }
+
+  h3 {
+    font-family: $font-heading;
+    font-size: 2rem;
+    color: $heading-color;
+    margin-bottom: 0.3rem;
+  }
+
+  p {
+    font-family: $font-body;
+    font-size: 1.4rem;
+    color: $paragraph-color;
+    margin: 0;
+  }
+}
+
+.excel-import-actions {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+
+  .btn-download-template {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1.2rem 2rem;
+    background: rgba(33, 115, 70, 0.1);
+    color: #217346;
+    border: 2px solid #217346;
+    border-radius: 8px;
+    font-family: $font-accent;
+    font-size: 1.4rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    .anticon {
+      font-size: 1.6rem;
+    }
+
+    &:hover {
+      background: #217346;
+      color: $white;
+    }
+  }
+
+  .btn-upload-wrapper {
+    .btn-upload {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 1.2rem 2rem;
+      background: $vintage-brown;
+      color: $white;
+      border: 2px solid $vintage-brown;
+      border-radius: 8px;
+      font-family: $font-accent;
+      font-size: 1.4rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      .anticon {
+        font-size: 1.6rem;
+      }
+
+      &:hover {
+        background: $vintage-brown-dark;
+        border-color: $vintage-brown-dark;
+      }
+    }
+  }
+}
+
+.excel-import-result {
+  margin-bottom: 1.5rem;
+
+  .result-success {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.2rem 1.5rem;
+    background: rgba(82, 196, 26, 0.1);
+    border: 1px solid rgba(82, 196, 26, 0.3);
+    border-radius: 8px;
+    color: #52c41a;
+    font-family: $font-body;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+
+    .anticon {
+      font-size: 1.8rem;
+    }
+  }
+
+  .result-error {
+    padding: 1.2rem 1.5rem;
+    background: rgba(255, 77, 79, 0.1);
+    border: 1px solid rgba(255, 77, 79, 0.3);
+    border-radius: 8px;
+    color: #ff4d4f;
+    font-family: $font-body;
+    font-size: 1.4rem;
+
+    >span {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      .anticon {
+        font-size: 1.8rem;
+      }
+    }
+
+    ul {
+      margin: 1rem 0 0;
+      padding-left: 2rem;
+
+      li {
+        font-size: 1.3rem;
+        margin-bottom: 0.3rem;
+      }
+    }
+  }
+}
+
+.excel-import-note {
+  padding: 1.2rem 1.5rem;
+  background: rgba($vintage-gold, 0.1);
+  border-left: 4px solid $vintage-gold;
+  border-radius: 4px;
+
+  p {
+    font-family: $font-body;
+    font-size: 1.3rem;
+    color: $vintage-brown;
+    margin: 0;
+    line-height: 1.6;
+
+    strong {
+      color: $heading-color;
+    }
+  }
+}

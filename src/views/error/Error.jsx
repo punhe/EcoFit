@@ -1,9 +1,10 @@
 import { useScrollTop } from '@/hooks';
-import PropType from 'prop-types';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const Error = ({ history }) => {
+const Error = () => {
   useScrollTop();
+  const navigate = useNavigate();
 
   return (
     <div className="page-not-found">
@@ -11,7 +12,7 @@ const Error = ({ history }) => {
       <br />
       <button
         className="button"
-        onClick={() => history.push('/')}
+        onClick={() => navigate('/')}
         type="button"
       >
         Try Again
@@ -19,12 +20,6 @@ const Error = ({ history }) => {
     </div>
 
   );
-};
-
-Error.propTypes = {
-  history: PropType.shape({
-    push: PropType.func
-  }).isRequired
 };
 
 export default Error;

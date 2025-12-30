@@ -13,6 +13,10 @@ export default defineConfig({
     }
   },
   server: {
-    port: 3000
+    port: 4000,
+    open: true
+  },
+  css: {
+    postcss: './postcss.config.js'
   }
 })

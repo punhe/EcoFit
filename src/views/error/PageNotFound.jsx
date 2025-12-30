@@ -1,9 +1,10 @@
 import { useScrollTop } from '@/hooks';
-import PropType from 'prop-types';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const PageNotFound = ({ history }) => {
+const PageNotFound = () => {
   useScrollTop();
+  const navigate = useNavigate();
 
   return (
     <div className="page-not-found">
@@ -11,19 +12,13 @@ const PageNotFound = ({ history }) => {
       <br />
       <button
         className="button"
-        onClick={history.goBack}
+        onClick={() => navigate(-1)}
         type="button"
       >
         Go back
       </button>
     </div>
   );
-};
-
-PageNotFound.propTypes = {
-  history: PropType.shape({
-    goBack: PropType.func
-  }).isRequired
 };
 
 export default PageNotFound;

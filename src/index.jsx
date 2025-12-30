@@ -1,13 +1,14 @@
 import { Preloader } from "@/components/common";
 import "normalize.css/normalize.css";
 import React from "react";
-import { render } from "react-dom";
+import { createRoot } from "react-dom/client";
 import "react-phone-input-2/lib/style.css";
 import {
   onAuthStateFail,
   onAuthStateSuccess,
 } from "@/redux/actions/authActions";
 import configureStore from "@/redux/store/store";
+import "@/styles/tailwind.css";
 import "@/styles/style.scss";
 import WebFont from "webfontloader";
 import App from "./App";
@@ -20,10 +21,11 @@ WebFont.load({
 });
 
 const { store, persistor } = configureStore();
-const root = document.getElementById("app");
+const container = document.getElementById("app");
+const root = createRoot(container);
 
 // Render the preloader on initial load
-render(<Preloader />, root);
+root.render(<Preloader />);
 
 firebase.auth.onAuthStateChanged((user) => {
   if (user) {
@@ -32,7 +34,7 @@ firebase.auth.onAuthStateChanged((user) => {
     store.dispatch(onAuthStateFail("Failed to authenticate"));
   }
   // then render the app after checking the auth state
-  render(<App store={store} persistor={persistor} />, root);
+  root.render(<App store={store} persistor={persistor} />);
 });
 
 if (process.env.NODE_ENV === "production" && "serviceWorker" in navigator) {

@@ -3,46 +3,33 @@
 import { AdminNavigation, AdminSideBar } from '@/components/common';
 import PropType from 'prop-types';
 import React from 'react';
-import { connect } from 'react-redux';
-import { Redirect, Route } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 
-const AdminRoute = ({
-  isAuth, role, component: Component, ...rest
-}) => (
-  <Route
-    {...rest}
-    component={(props) => (
-      isAuth && role === 'ADMIN' ? (
-        <>
-          <AdminNavigation />
-          <main className="content-admin">
-            <AdminSideBar />
-            <div className="content-admin-wrapper">
-              <Component {...props} />
-            </div>
-          </main>
-        </>
-      ) : <Redirect to="/" />
-    )}
-  />
-);
+const AdminRoute = ({ children }) => {
+  const { auth } = useSelector((state) => state);
+  const isAuth = !!auth?.id && !!auth?.role;
+  const role = auth?.role || '';
 
-const mapStateToProps = ({ auth }) => ({
-  isAuth: !!auth?.id && !!auth?.role,
-  role: auth?.role || ''
-});
+  if (isAuth && role === 'ADMIN') {
+    return (
+      <>
+        <AdminNavigation />
+        <main className="content-admin">
+          <AdminSideBar />
+          <div className="content-admin-wrapper">
+            {children}
+          </div>
+        </main>
+      </>
+    );
+  }
 
-AdminRoute.defaultProps = {
-  isAuth: false,
-  role: 'USER'
+  return <Navigate to="/" replace />;
 };
 
 AdminRoute.propTypes = {
-  isAuth: PropType.bool,
-  role: PropType.string,
-  component: PropType.func.isRequired,
-  // eslint-disable-next-line react/require-default-props
-  rest: PropType.any
+  children: PropType.node.isRequired
 };
 
-export default connect(mapStateToProps)(AdminRoute);
+export default AdminRoute;

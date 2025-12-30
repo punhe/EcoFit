@@ -3,11 +3,11 @@ import { FiltersToggle, SearchBar } from '@/components/common';
 import { ADD_PRODUCT } from '@/constants/routes';
 import PropType from 'prop-types';
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const ProductsNavbar = (props) => {
   const { productsCount, totalProductsCount } = props;
-  const history = useHistory();
+  const navigate = useNavigate();
 
   return (
     <div className="product-admin-header">
@@ -27,7 +27,7 @@ const ProductsNavbar = (props) => {
       </FiltersToggle>
       <button
         className="button button-small"
-        onClick={() => history.push(ADD_PRODUCT)}
+        onClick={() => navigate(ADD_PRODUCT)}
         type="button"
       >
         <PlusOutlined />

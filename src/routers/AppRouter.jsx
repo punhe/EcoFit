@@ -1,6 +1,5 @@
 import React from "react";
-import { Router, Switch, Route } from "react-router-dom";
-import { createBrowserHistory } from "history";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import * as ROUTES from "@/constants/routes";
 
 import { Navigation, Footer } from "@/components/common";
@@ -10,71 +9,121 @@ import AdminRoute from "./AdminRoute";
 import ClientRoute from "./ClientRoute";
 import PublicRoute from "./PublicRoute";
 
-export const history = createBrowserHistory();
-
 const AppRouter = () => (
-  <Router history={history}>
+  <BrowserRouter>
     <Navigation />
     <Basket />
-    <Switch>
-      <Route exact path="/" component={view.Home} />
-      <Route path="/search" component={view.Search} />
-      <Route path="/product/:id" component={view.ViewProduct} />
-      <Route path="/featured" component={view.FeaturedProducts} />
-      <Route path="/recommended" component={view.RecommendedProducts} />
-      <Route path={ROUTES.SHOP} component={view.Shop} />
-      <PublicRoute
+    <Routes>
+      <Route path="/" element={<view.Home />} />
+      <Route path="/search" element={<view.Search />} />
+      <Route path="/product/:id" element={<view.ViewProduct />} />
+      <Route path="/featured" element={<view.FeaturedProducts />} />
+      <Route path="/recommended" element={<view.RecommendedProducts />} />
+      <Route path={ROUTES.SHOP} element={<view.Shop />} />
+      <Route
         path={ROUTES.SIGNIN}
-        component={view.SignIn}
+        element={
+          <PublicRoute path={ROUTES.SIGNIN}>
+            <view.SignIn />
+          </PublicRoute>
+        }
       />
-      <PublicRoute
+      <Route
         path={ROUTES.SIGNUP}
-        component={view.SignUp}
+        element={
+          <PublicRoute path={ROUTES.SIGNUP}>
+            <view.SignUp />
+          </PublicRoute>
+        }
       />
-      <PublicRoute
+      <Route
         path={ROUTES.FORGOT_PASSWORD}
-        component={view.ForgotPassword}
+        element={
+          <PublicRoute path={ROUTES.FORGOT_PASSWORD}>
+            <view.ForgotPassword />
+          </PublicRoute>
+        }
       />
-      <ClientRoute
+      <Route
+        path={ROUTES.ADMIN_SIGNUP}
+        element={<view.AdminSignUp />}
+      />
+      <Route
         path={ROUTES.CHECKOUT}
-        component={view.Checkout}
+        element={
+          <ClientRoute>
+            <view.Checkout />
+          </ClientRoute>
+        }
       />
-      <ClientRoute
+      <Route
         path="/checkout/success"
-        component={view.PaymentResult}
+        element={
+          <ClientRoute>
+            <view.PaymentResult />
+          </ClientRoute>
+        }
       />
-      <ClientRoute
+      <Route
         path="/checkout/cancel"
-        component={view.PaymentResult}
+        element={
+          <ClientRoute>
+            <view.PaymentResult />
+          </ClientRoute>
+        }
       />
-      <ClientRoute
+      <Route
         path="/account"
-        component={view.UserAccount}
+        element={
+          <ClientRoute>
+            <view.UserAccount />
+          </ClientRoute>
+        }
       />
-      <ClientRoute
+      <Route
         path={ROUTES.ACCOUNT_EDIT}
-        component={view.EditAccount}
+        element={
+          <ClientRoute>
+            <view.EditAccount />
+          </ClientRoute>
+        }
       />
-      <AdminRoute
+      <Route
         path={ROUTES.ADMIN_DASHBOARD}
-        component={view.Dashboard}
+        element={
+          <AdminRoute>
+            <view.Dashboard />
+          </AdminRoute>
+        }
       />
-      <AdminRoute
+      <Route
         path={ROUTES.ADMIN_PRODUCTS}
-        component={view.Products}
+        element={
+          <AdminRoute>
+            <view.Products />
+          </AdminRoute>
+        }
       />
-      <AdminRoute
+      <Route
         path={ROUTES.ADD_PRODUCT}
-        component={view.AddProduct}
+        element={
+          <AdminRoute>
+            <view.AddProduct />
+          </AdminRoute>
+        }
       />
-      <AdminRoute
+      <Route
         path={ROUTES.EDIT_PRODUCT}
-        component={view.EditProduct}
+        element={
+          <AdminRoute>
+            <view.EditProduct />
+          </AdminRoute>
+        }
       />
-      <Route path="*" component={view.PageNotFound} />
-    </Switch>
+      <Route path="*" element={<view.PageNotFound />} />
+    </Routes>
     <Footer />
-  </Router>
+  </BrowserRouter>
 );
 
 export default AppRouter;

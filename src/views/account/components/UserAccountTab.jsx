@@ -5,10 +5,11 @@ import { displayDate } from '@/helpers/utils';
 import PropType from 'prop-types';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-const UserProfile = (props) => {
+const UserProfile = () => {
   const profile = useSelector((state) => state.profile);
+  const navigate = useNavigate();
 
   return (
     <div className="user-profile">
@@ -30,7 +31,7 @@ const UserProfile = (props) => {
           </div>
           <button
             className="button button-small user-profile-edit"
-            onClick={() => props.history.push(ACCOUNT_EDIT)}
+            onClick={() => navigate(ACCOUNT_EDIT)}
             type="button"
           >
             Edit Account
@@ -68,10 +69,4 @@ const UserProfile = (props) => {
   );
 };
 
-UserProfile.propTypes = {
-  history: PropType.shape({
-    push: PropType.func
-  }).isRequired
-};
-
-export default withRouter(UserProfile);
+export default UserProfile;

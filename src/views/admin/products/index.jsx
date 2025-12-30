@@ -4,13 +4,13 @@ import { AppliedFilters, ProductList } from '@/components/product';
 import { useDocumentTitle, useScrollTop } from '@/hooks';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import { selectFilter } from '@/selectors/selector';
 import { ProductsNavbar } from '../components';
 import ProductsTable from '../components/ProductsTable';
+import ExcelImport from '@/components/admin/ExcelImport';
 
 const Products = () => {
-  useDocumentTitle('Product List | ECOFIT Admin');
+  useDocumentTitle('Quản lý sản phẩm | ECOFIT Admin');
   useScrollTop();
 
   const store = useSelector((state) => ({
@@ -27,6 +27,9 @@ const Products = () => {
         totalProductsCount={store.products.total}
       />
       <div className="product-admin-items">
+        {/* Excel Import Section */}
+        <ExcelImport />
+
         <ProductList {...store}>
           <AppliedFilters filter={store.filter} />
           <ProductsTable filteredProducts={store.filteredProducts} />
@@ -36,4 +39,4 @@ const Products = () => {
   );
 };
 
-export default withRouter(Products);
+export default Products;

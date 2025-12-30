@@ -2,7 +2,7 @@
 import { SearchOutlined } from '@ant-design/icons';
 import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { clearRecentSearch, removeSelectedRecent } from '@/redux/actions/filterActions';
 
 const SearchBar = () => {
@@ -12,7 +12,7 @@ const SearchBar = () => {
     isLoading: state.app.loading
   }));
   const searchbarRef = useRef(null);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   const isMobile = window.screen.width <= 800;
@@ -29,10 +29,10 @@ const SearchBar = () => {
       searchbarRef.current.classList.remove('is-open-recent-search');
 
       if (isMobile) {
-        history.push('/');
+        navigate('/');
       }
 
-      history.push(`/search/${searchInput.trim().toLowerCase()}`);
+      navigate(`/search/${searchInput.trim().toLowerCase()}`);
     }
   };
 
@@ -57,7 +57,7 @@ const SearchBar = () => {
   const onClickRecentSearch = (keyword) => {
     // dispatch(setTextFilter(keyword));
     searchbarRef.current.classList.remove('is-open-recent-search');
-    history.push(`/search/${keyword.trim().toLowerCase()}`);
+    navigate(`/search/${keyword.trim().toLowerCase()}`);
   };
 
   const onClearRecent = () => {

@@ -5,6 +5,7 @@ export { default as Products } from './admin/products';
 export { default as ForgotPassword } from './auth/forgot_password';
 export { default as SignIn } from './auth/signin';
 export { default as SignUp } from './auth/signup';
+export { default as AdminSignUp } from './auth/admin-signup';
 export { default as Checkout } from './checkout';
 export { default as PaymentResult } from './checkout/PaymentResult';
 export { default as EditAccount } from './account/edit_account';

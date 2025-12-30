@@ -1,10 +1,10 @@
 import React from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import { useDocumentTitle } from '@/hooks';
 
 const PaymentResult = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
   const isSuccess = location.pathname === '/checkout/success';
   
@@ -30,7 +30,7 @@ const PaymentResult = () => {
       <div className="checkout-success-action">
         <button
           className="button"
-          onClick={() => history.push('/')}
+          onClick={() => navigate('/')}
           type="button"
         >
           Tiếp tục mua sắm

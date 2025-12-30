@@ -2,7 +2,6 @@ import { LoadingOutlined } from '@ant-design/icons';
 import { useDocumentTitle, useScrollTop } from '@/hooks';
 import React, { lazy, Suspense } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import { addProduct } from '@/redux/actions/productActions';
 
 const ProductForm = lazy(() => import('../components/ProductForm'));
@@ -51,4 +50,4 @@ const AddProduct = () => {
   );
 };
 
-export default withRouter(AddProduct);
+export default AddProduct;

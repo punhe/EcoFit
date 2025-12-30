@@ -1,12 +1,14 @@
+// Vintage Footer Styles
 .footer {
   position: relative;
   padding: 2rem $xxl-size;
   margin-top: $xl-size;
-  background: $off-white;
+  background: $vintage-beige;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 -2px 15px rgba(139, 69, 19, 0.08);
+  border-top: 3px solid $vintage-gold;
 
   @include mobile {
     padding: 2rem 1rem;
@@ -17,9 +19,10 @@
   a {
     text-decoration: none;
     transition: color 0.3s ease;
+    color: $vintage-brown;
 
     &:hover {
-      color: darken($off-white, 30%);
+      color: $vintage-gold;
     }
   }
 }
@@ -29,9 +32,11 @@
   height: 6rem;
   object-fit: contain;
   transition: transform 0.3s ease;
+  filter: sepia(20%);
 
   &:hover {
     transform: scale(1.05);
+    filter: sepia(0%);
   }
 }
 
@@ -49,16 +54,16 @@
   padding: 3rem 0;
   text-align: center;
   flex-basis: 20%;
-  border-left: 1px solid rgba(0, 0, 0, 0.1);
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  border-left: 1px solid $vintage-gold;
+  border-right: 1px solid $vintage-gold;
 
   @include mobile {
     flex-basis: none;
     order: 3;
     padding: 1.5rem 0;
     border: none;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: 1px solid $vintage-gold;
+    border-bottom: 1px solid $vintage-gold;
     margin: 1rem 0;
   }
 }
@@ -75,6 +80,7 @@
 }
 
 @include mobile {
+
   .footer-col-1,
   .footer-col-2,
   .footer-col-3 {
@@ -83,14 +89,43 @@
   }
 }
 
-// Styles mới cho footer mới
+// New vintage footer styles
 .footer-new {
-  background-color: #0f172a;
-  color: #f1f5f9;
+  background: linear-gradient(180deg, $vintage-brown-dark 0%, #3D2914 100%);
+  color: $vintage-cream;
   width: 100%;
-  padding: 4rem 0 1rem;
-  margin-top: 4rem;
-  font-family: "Roboto", sans-serif;
+  padding: 5rem 0 1.5rem;
+  margin-top: 5rem;
+  font-family: $font-body;
+  position: relative;
+
+  // Decorative top border
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        $vintage-gold 20%,
+        $vintage-gold-light 50%,
+        $vintage-gold 80%,
+        transparent 100%);
+  }
+
+  // Decorative pattern overlay
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c4a35a' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+  }
 }
 
 .footer-content {
@@ -100,6 +135,8 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
+  position: relative;
+  z-index: 1;
 
   @include mobile {
     flex-direction: column;
@@ -109,9 +146,9 @@
 
 .footer-col {
   flex: 1;
-  margin-bottom: 2rem;
-  min-width: 170px;
-  padding: 0 1rem;
+  margin-bottom: 2.5rem;
+  min-width: 180px;
+  padding: 0 1.5rem;
 
   @include mobile {
     margin-bottom: 3rem;
@@ -119,20 +156,22 @@
   }
 
   h4 {
-    font-size: 1.6rem;
-    margin-bottom: 1.5rem;
+    font-family: $font-heading;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
     font-weight: 600;
     position: relative;
-    color: #fff;
+    color: $vintage-gold-light;
+    letter-spacing: $letter-spacing-wide;
+    text-transform: uppercase;
 
     &:after {
-      content: "";
+      content: "✦";
       position: absolute;
-      bottom: -8px;
+      bottom: -12px;
       left: 0;
-      width: 50px;
-      height: 2px;
-      background: #2196f3;
+      font-size: 1rem;
+      color: $vintage-gold;
 
       @include mobile {
         left: 50%;
@@ -146,17 +185,34 @@
     padding: 0;
 
     li {
-      margin-bottom: 1rem;
+      margin-bottom: 1.2rem;
 
       a {
-        color: #94a3b8;
+        color: rgba($vintage-cream, 0.75);
         text-decoration: none;
         font-size: 1.4rem;
+        font-family: $font-body;
         transition: all 0.3s ease;
+        position: relative;
+        display: inline-block;
+
+        &::before {
+          content: '→';
+          position: absolute;
+          left: -20px;
+          opacity: 0;
+          transition: all 0.3s ease;
+          color: $vintage-gold;
+        }
 
         &:hover {
-          color: #fff;
-          padding-left: 5px;
+          color: $vintage-gold-light;
+          padding-left: 20px;
+
+          &::before {
+            opacity: 1;
+            left: 0;
+          }
         }
       }
     }
@@ -167,48 +223,66 @@
   flex: 1.5;
 
   p {
-    color: #94a3b8;
+    color: rgba($vintage-cream, 0.7);
     margin-bottom: 2rem;
-    line-height: 1.6;
+    line-height: 1.7;
     font-size: 1.4rem;
+    font-family: $font-body;
   }
 
   .subscribe-form {
     display: flex;
     margin-bottom: 2rem;
+    border: 1px solid rgba($vintage-gold, 0.3);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+
+    &:focus-within {
+      border-color: $vintage-gold;
+      box-shadow: 0 0 15px rgba($vintage-gold, 0.2);
+    }
 
     input {
       flex: 1;
-      padding: 1.2rem;
+      padding: 1.4rem;
       border: none;
-      border-radius: 4px 0 0 4px;
-      background: #1e293b;
-      color: #fff;
+      background: rgba($white, 0.05);
+      color: $vintage-cream;
       font-size: 1.4rem;
+      font-family: $font-body;
 
       &::placeholder {
-        color: #94a3b8;
+        color: rgba($vintage-cream, 0.5);
+        font-style: italic;
       }
 
       &:focus {
         outline: none;
-        background: #334155;
+        background: rgba($white, 0.08);
       }
     }
 
     button {
-      padding: 0 1.5rem;
-      background: #2196f3;
-      color: white;
+      padding: 0 2rem;
+      background: $vintage-gold;
+      color: $vintage-brown-dark;
       border: none;
-      border-radius: 0 4px 4px 0;
+      border-radius: 0;
       cursor: pointer;
       font-size: 1.4rem;
-      font-weight: 600;
-      transition: background 0.3s ease;
+      font-family: $font-accent;
+      font-weight: 700;
+      letter-spacing: $letter-spacing-wide;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
 
       &:hover {
-        background: #1e88e5;
+        background: $vintage-gold-light;
+      }
+
+      &::before {
+        display: none;
       }
     }
   }
@@ -217,7 +291,7 @@
 .social-links {
   display: flex;
   gap: 1.5rem;
-  margin-top: 2rem;
+  margin-top: 2.5rem;
 
   @include mobile {
     justify-content: center;
@@ -227,17 +301,21 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 3.6rem;
-    height: 3.6rem;
-    background: #1e293b;
-    color: #fff;
+    width: 4rem;
+    height: 4rem;
+    background: rgba($white, 0.05);
+    color: $vintage-cream;
+    border: 1px solid rgba($vintage-gold, 0.3);
     border-radius: 50%;
     transition: all 0.3s ease;
     font-size: 1.6rem;
 
     &:hover {
-      background: #2196f3;
-      transform: translateY(-3px);
+      background: $vintage-gold;
+      color: $vintage-brown-dark;
+      border-color: $vintage-gold;
+      transform: translateY(-4px) rotate(5deg);
+      box-shadow: 0 8px 20px rgba($vintage-gold, 0.3);
     }
   }
 }
@@ -245,14 +323,37 @@
 .footer-bottom {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 2.5rem 2rem;
   text-align: center;
-  border-top: 1px solid #1e293b;
+  border-top: 1px solid rgba($vintage-gold, 0.2);
   margin-top: 3rem;
+  position: relative;
+  z-index: 1;
+
+  // Decorative element
+  &::before {
+    content: '✦ ✦ ✦';
+    display: block;
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: $vintage-brown-dark;
+    padding: 0 1.5rem;
+    color: $vintage-gold;
+    font-size: 1rem;
+    letter-spacing: 0.5rem;
+  }
 
   p {
     font-size: 1.4rem;
-    color: #94a3b8;
+    color: rgba($vintage-cream, 0.6);
     margin: 0.5rem 0;
+    font-family: $font-body;
+
+    &:first-child {
+      font-family: $font-accent;
+      font-size: 1.5rem;
+    }
   }
 }

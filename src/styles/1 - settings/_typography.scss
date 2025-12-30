@@ -1,9 +1,34 @@
 // 
-// TYPOGRAPHY ---------
+// TYPOGRAPHY --------- VINTAGE & RETRO THEME
 //
 
-$baseFontSize : 1.6rem;
-$font-small: 1.2rem;
+// Import Google Fonts - Vintage & Retro Collection
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Young+Serif&family=Yellowtail&family=Righteous&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cinzel:wght@400;500;600;700&display=swap');
+
+// Font families - Vintage & Retro Collection
+$font-heading: 'Playfair Display', Georgia, 'Times New Roman', serif;
+$font-body: 'Lora', Georgia, serif;
+$font-accent: 'Cormorant Garamond', Georgia, serif;
+$font-display: 'Cinzel', Georgia, serif; // For special headings
+$font-elegant: 'EB Garamond', Georgia, serif; // For elegant text
+
+// Retro Fonts
+$font-retro: 'Young Serif', Georgia, serif; // Modern retro serif
+$font-script: 'Yellowtail', cursive; // 50s script style
+$font-bold-retro: 'Righteous', cursive; // Bold retro display
+
+// Font sizes
+$baseFontSize: 1.6rem;
+$font-small: 1.3rem;
 $font-medium: 1.5rem;
-$font-large: 2rem;
-$font-xlarge: 4rem;
+$font-large: 2.2rem;
+$font-xlarge: 4.5rem;
+
+// Line heights
+$line-height: 1.7;
+$line-height-heading: 1.3;
+
+// Letter spacing for vintage feel
+$letter-spacing-wide: 0.05em;
+$letter-spacing-wider: 0.1em;
+$letter-spacing-extra: 0.15em;

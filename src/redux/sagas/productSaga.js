@@ -12,7 +12,7 @@ import {
   all, call, put, select
 } from 'redux-saga/effects';
 import { setLoading, setRequestStatus } from '@/redux/actions/miscActions';
-import { history } from '@/routers/AppRouter';
+import { history } from '@/history';
 import firebase from '@/services/firebase';
 import {
   addProductSuccess,

@@ -7,9 +7,10 @@ const SideNavigation = () => (
     <div className="sidenavigation-wrapper">
       <div className="sidenavigation-item">
         <NavLink
-          activeClassName="sidenavigation-menu-active"
-          className="sidenavigation-menu"
           to={ADMIN_PRODUCTS}
+          className={({ isActive }) =>
+            `sidenavigation-menu ${isActive ? 'sidenavigation-menu-active' : ''}`
+          }
         >
           Products
         </NavLink>

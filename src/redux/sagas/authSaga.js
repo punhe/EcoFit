@@ -4,7 +4,7 @@ import {
   SET_AUTH_PERSISTENCE,
   SIGNIN, SIGNIN_WITH_FACEBOOK,
   SIGNIN_WITH_GITHUB, SIGNIN_WITH_GOOGLE,
-  SIGNOUT, SIGNUP
+  SIGNOUT, SIGNUP, SIGNUP_ADMIN
 } from '@/constants/constants';
 import { SIGNIN as ROUTE_SIGNIN } from '@/constants/routes';
 import defaultAvatar from '@/images/defaultAvatar.jpg';
@@ -16,7 +16,7 @@ import { resetCheckout } from '@/redux/actions/checkoutActions';
 import { resetFilter } from '@/redux/actions/filterActions';
 import { setAuthenticating, setAuthStatus } from '@/redux/actions/miscActions';
 import { clearProfile, setProfile } from '@/redux/actions/profileActions';
-import { history } from '@/routers/AppRouter';
+import { history } from '@/history';
 import firebase from '@/services/firebase';
 
 function* handleError(e) {
@@ -109,6 +109,37 @@ function* authSaga({ type, payload }) {
         yield handleError(e);
       }
       break;
+    case SIGNUP_ADMIN:
+      try {
+        yield initRequest();
+
+        const refAdmin = yield call(firebase.createAccount, payload.email, payload.password);
+        const fullnameAdmin = payload.fullname.split(' ').map((name) => name[0].toUpperCase().concat(name.substring(1))).join(' ');
+        const adminUser = {
+          fullname: fullnameAdmin,
+          avatar: defaultAvatar,
+          banner: defaultBanner,
+          email: payload.email,
+          address: '',
+          basket: [],
+          mobile: { data: {} },
+          role: 'ADMIN',
+          dateJoined: refAdmin.user.metadata.creationTime || new Date().getTime()
+        };
+
+        yield call(firebase.addUser, refAdmin.user.uid, adminUser);
+        yield put(setProfile(adminUser));
+        yield put(setAuthenticating(false));
+        yield put(setAuthStatus({
+          success: true,
+          type: 'auth',
+          isError: false,
+          message: 'Tài khoản Admin đã được tạo thành công!'
+        }));
+      } catch (e) {
+        yield handleError(e);
+      }
+      break;
     case SIGNOUT: {
       try {
         yield initRequest();
@@ -154,6 +185,14 @@ function* authSaga({ type, payload }) {
           provider: payload.providerData[0].providerId
         }));
       } else if (payload.providerData[0].providerId !== 'password' && !snapshot.data()) {
+        // Check if this is an admin signup
+        const isAdminSignup = typeof window !== 'undefined' && localStorage.getItem('adminSignup') === 'true';
+
+        // Clear the flag
+        if (typeof window !== 'undefined') {
+          localStorage.removeItem('adminSignup');
+        }
+
         // add the user if auth provider is not password
         const user = {
           fullname: payload.displayName ? payload.displayName : 'User',
@@ -163,7 +202,7 @@ function* authSaga({ type, payload }) {
           address: '',
           basket: [],
           mobile: { data: {} },
-          role: 'USER',
+          role: isAdminSignup ? 'ADMIN' : 'USER',
           dateJoined: payload.metadata.creationTime
         };
         yield call(firebase.addUser, payload.uid, user);

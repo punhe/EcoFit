@@ -3,14 +3,14 @@ import { LoadingOutlined } from '@ant-design/icons';
 import { Boundary, MessageDisplay } from '@/components/common';
 import { ProductGrid } from '@/components/product';
 import { useDidMount } from '@/hooks';
-import PropType from 'prop-types';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { setRequestStatus } from '@/redux/actions/miscActions';
 import { searchProduct } from '@/redux/actions/productActions';
 
-const Search = ({ match }) => {
-  const { searchKey } = match.params;
+const Search = () => {
+  const { searchKey } = useParams();
   const dispatch = useDispatch();
   const didMount = useDidMount(true);
   const store = useSelector((state) => ({
@@ -21,7 +21,7 @@ const Search = ({ match }) => {
   }));
 
   useEffect(() => {
-    if (didMount && !store.isLoading) {
+    if (didMount && !store.isLoading && searchKey) {
       dispatch(searchProduct(searchKey));
     }
   }, [searchKey]);
@@ -35,7 +35,7 @@ const Search = ({ match }) => {
       <main className="content">
         <MessageDisplay
           message={store.requestStatus}
-          desc="Try using correct filters or keyword."
+          desc="Thử sử dụng từ khóa khác."
         />
       </main>
     );
@@ -46,11 +46,11 @@ const Search = ({ match }) => {
       <Boundary>
         <main className="content">
           <section className="product-list-wrapper product-list-search">
-            {!store.requestStatus && (
+            {!store.requestStatus && searchKey && (
               <div className="product-list-header">
                 <div className="product-list-header-title">
                   <h5>
-                    {`Found ${store.products.length} ${store.products.length > 1 ? 'products' : 'product'} with keyword ${searchKey}`}
+                    {`Tìm thấy ${store.products.length} ${store.products.length > 1 ? 'sản phẩm' : 'sản phẩm'} với từ khóa "${searchKey}"`}
                   </h5>
                 </div>
               </div>
@@ -65,20 +65,12 @@ const Search = ({ match }) => {
   return (
     <main className="content">
       <div className="loader">
-        <h4>Searching Product...</h4>
+        <h4>Đang tìm kiếm sản phẩm...</h4>
         <br />
         <LoadingOutlined style={{ fontSize: '3rem' }} />
       </div>
     </main>
   );
-};
-
-Search.propTypes = {
-  match: PropType.shape({
-    params: PropType.shape({
-      searchKey: PropType.string
-    })
-  }).isRequired
 };
 
 export default Search;

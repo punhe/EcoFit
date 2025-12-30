@@ -4,11 +4,11 @@
   justify-content: center;
   padding: $l-size;
   padding-top: $m-size;
-  
+
   @include tablet {
     flex-direction: column;
   }
-  
+
   @include mobile {
     padding: $m-size;
   }
@@ -52,7 +52,7 @@
     width: 100%;
   }
 
-  & > button {
+  &>button {
     margin-bottom: $s-size;
   }
 }
@@ -85,7 +85,7 @@
   background: $color-facebook;
   color: $white;
   border: 1px solid $color-facebook;
-  
+
   &:hover {
     background: $color-facebook-hover;
     border: 1px solid $color-facebook;
@@ -97,7 +97,7 @@
   background: $color-github;
   color: $white;
   border: 1px solid $color-github;
-  
+
   &:hover {
     background: $color-github-hover;
     border: 1px solid $color-github;
@@ -214,11 +214,11 @@
 .forgot_password {
   width: 50%;
   margin: auto;
-  
+
   @include mobile {
     width: 100%;
     padding: $s-size;
-  } 
+  }
 }
 
 .auth-success {
@@ -227,4 +227,49 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+// Admin Signup Link
+.admin-signup-link {
+  text-align: center;
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba($vintage-gold, 0.1) 0%, rgba($vintage-gold, 0.05) 100%);
+  border-radius: 8px;
+  border: 1px dashed rgba($vintage-gold, 0.3);
+
+  .admin-switch-btn {
+    background: transparent;
+    border: 2px solid $vintage-gold;
+    color: $vintage-brown;
+    padding: 1rem 2rem;
+    font-family: $font-accent;
+    font-size: 1.4rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    transition: all 0.3s ease;
+
+    .anticon {
+      color: $vintage-gold;
+      font-size: 1.6rem;
+    }
+
+    &:hover {
+      background: $vintage-gold;
+      color: $white;
+
+      .anticon {
+        color: $white;
+      }
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
 }

@@ -1,13 +1,12 @@
-import { ArrowRightOutlined, LoadingOutlined } from '@ant-design/icons';
+import { ArrowRightOutlined, LoadingOutlined, CrownOutlined } from '@ant-design/icons';
 import { SocialLogin } from '@/components/common';
 import { CustomInput } from '@/components/formik';
-import { FORGOT_PASSWORD, SIGNUP } from '@/constants/routes';
+import { FORGOT_PASSWORD, SIGNUP, ADMIN_SIGNUP } from '@/constants/routes';
 import { Field, Form, Formik } from 'formik';
 import { useDocumentTitle, useScrollTop } from '@/hooks';
-import PropType from 'prop-types';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { signIn } from '@/redux/actions/authActions';
 import { setAuthenticating, setAuthStatus } from '@/redux/actions/miscActions';
 import * as Yup from 'yup';
@@ -20,13 +19,14 @@ const SignInSchema = Yup.object().shape({
     .required('Mật khẩu là bắt buộc.')
 });
 
-const SignIn = ({ history }) => {
+const SignIn = () => {
   const { authStatus, isAuthenticating } = useSelector((state) => ({
     authStatus: state.app.authStatus,
     isAuthenticating: state.app.isAuthenticating
   }));
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useScrollTop();
   useDocumentTitle('Đăng nhập | ECOFIT');
@@ -36,7 +36,8 @@ const SignIn = ({ history }) => {
     dispatch(setAuthenticating(false));
   }, []);
 
-  const onSignUp = () => history.push(SIGNUP);
+  const onSignUp = () => navigate(SIGNUP);
+  const onAdminSignUp = () => navigate(ADMIN_SIGNUP);
 
   const onSubmitForm = (form) => {
     dispatch(signIn(form.email, form.password));
@@ -141,16 +142,23 @@ const SignIn = ({ history }) => {
               Đăng ký
             </button>
           </div>
+
+          {/* Admin Sign Up Link */}
+          <div className="admin-signup-link">
+            <button
+              className="button button-small admin-switch-btn"
+              disabled={isAuthenticating}
+              onClick={onAdminSignUp}
+              type="button"
+            >
+              <CrownOutlined />
+              Đăng ký làm Admin
+            </button>
+          </div>
         </>
       )}
     </div>
   );
-};
-
-SignIn.propTypes = {
-  history: PropType.shape({
-    push: PropType.func
-  }).isRequired
 };
 
 export default SignIn;

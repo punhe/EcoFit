@@ -4,52 +4,28 @@
 import { ADMIN_DASHBOARD, SIGNIN } from '@/constants/routes';
 import PropType from 'prop-types';
 import React from 'react';
-import { connect } from 'react-redux';
-import { Redirect, Route } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Navigate, useLocation } from 'react-router-dom';
 
-const ClientRoute = ({
-  isAuth, role, component: Component, ...rest
-}) => (
-  <Route
-    {...rest}
-    render={(props) => {
-      if (isAuth && role === 'USER') {
-        return (
-          <main className="content">
-            <Component {...props} />
-          </main>
-        );
-      }
+const ClientRoute = ({ children }) => {
+  const { auth } = useSelector((state) => state);
+  const location = useLocation();
+  const isAuth = !!auth?.id && !!auth?.role;
+  const role = auth?.role || '';
 
-      if (isAuth && role === 'ADMIN') {
-        return <Redirect to={ADMIN_DASHBOARD} />;
-      }
+  if (isAuth && role === 'USER') {
+    return <main className="content">{children}</main>;
+  }
 
-      return (
-        <Redirect to={{
-          pathname: SIGNIN,
-          state: { from: props.location }
-        }}
-        />
-      );
-    }}
-  />
-);
+  if (isAuth && role === 'ADMIN') {
+    return <Navigate to={ADMIN_DASHBOARD} replace />;
+  }
 
-ClientRoute.defaultProps = {
-  isAuth: false,
-  role: 'USER'
+  return <Navigate to={SIGNIN} state={{ from: location }} replace />;
 };
 
 ClientRoute.propTypes = {
-  isAuth: PropType.bool,
-  role: PropType.string,
-  component: PropType.func.isRequired
+  children: PropType.node.isRequired
 };
 
-const mapStateToProps = ({ auth }) => ({
-  isAuth: !!auth?.id && !!auth?.role,
-  role: auth?.role || ''
-});
-
-export default connect(mapStateToProps)(ClientRoute);
+export default ClientRoute;

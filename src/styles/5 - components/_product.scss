@@ -1,13 +1,18 @@
+// ================================
+// VINTAGE PRODUCT STYLES
+// ================================
+
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  grid-gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-gap: 2.5rem;
   justify-content: center;
   padding: 2rem;
 
   @include mobile {
     grid-template-columns: repeat(2, 1fr) !important;
     padding: 1rem;
+    grid-gap: 1.5rem;
   }
 }
 
@@ -18,6 +23,16 @@
 
 .product-list-header-title {
   text-align: center;
+  font-family: $font-heading;
+  position: relative;
+
+  &::after {
+    content: '❧';
+    display: block;
+    font-size: 2rem;
+    color: $vintage-gold;
+    margin-top: 0.5rem;
+  }
 }
 
 .product-list-header-actions {
@@ -49,28 +64,66 @@
   }
 }
 
+// Vintage Product Card
 .product-card {
-  max-width: 280px;
-  height: 320px;
-  border: none;
+  max-width: 300px;
+  height: 380px;
+  border: 1px solid $border-color;
   text-align: center;
   position: relative;
   background: $white;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 4px 20px rgba(139, 69, 19, 0.08),
+    inset 0 0 50px rgba(245, 230, 211, 0.2);
   overflow: hidden;
   margin: auto;
   animation: slide-up 0.3s ease;
-  border-radius: 12px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 8px;
+  transition: all 0.4s ease;
+
+  // Vintage corner decorations
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border: 2px solid $vintage-gold;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 2;
+  }
+
+  &::before {
+    top: 10px;
+    left: 10px;
+    border-right: none;
+    border-bottom: none;
+  }
+
+  &::after {
+    bottom: 10px;
+    right: 10px;
+    border-left: none;
+    border-top: none;
+  }
 
   &:hover {
     cursor: pointer;
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    transform: translateY(-8px);
+    box-shadow:
+      0 15px 40px rgba(139, 69, 19, 0.15),
+      inset 0 0 50px rgba(245, 230, 211, 0.3);
+    border-color: $vintage-gold;
+
+    &::before,
+    &::after {
+      opacity: 1;
+    }
   }
 
   @include mobile {
-    height: 260px;
+    height: 320px;
   }
 }
 
@@ -83,7 +136,7 @@
 }
 
 .product-card:hover .product-card-img-wrapper {
-  height: 8rem;
+  height: 10rem;
   padding: 1rem;
 }
 
@@ -91,8 +144,8 @@
   position: absolute;
   top: 1rem;
   right: 1rem;
-  color: $green;
-  z-index: 1;
+  color: $vintage-olive;
+  z-index: 3;
 }
 
 .product-loading {
@@ -113,21 +166,34 @@
 }
 
 .product-card-content {
-  padding: 1.5rem;
+  padding: 1.8rem;
   transition: all 0.4s ease-in-out;
+  background: $white;
 }
 
 .product-card-img-wrapper {
   width: 100%;
-  height: 180px;
-  padding: 1rem;
+  height: 200px;
+  padding: 1.5rem;
   margin: auto;
   position: relative;
-  background: #f8f8f8;
+  background: $vintage-beige;
   transition: all 0.4s ease-in-out;
 
+  // Subtle vintage overlay
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(139, 69, 19, 0.02) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
   @include mobile {
-    height: 140px;
+    height: 160px;
   }
 }
 
@@ -136,38 +202,53 @@
 }
 
 .product-card-price {
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: 700;
-  color: #e74c3c;
+  color: $vintage-rust;
   margin: 1rem 0;
+  font-family: $font-heading;
 }
 
 .product-card-name {
   font-size: 1.6rem;
   font-weight: 600;
   margin: 1rem 0;
-  color: #2c3e50;
-  line-height: 1.4;
-  height: 44px;
+  color: $heading-color;
+  line-height: 1.5;
+  height: 48px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  font-family: $font-body;
 }
 
 .product-card-brand {
   margin-top: 0.5rem;
-  font-size: 1.4rem;
-  color: #7f8c8d;
+  font-size: 1.3rem;
+  color: $vintage-gold;
+  font-family: $font-accent;
   font-style: italic;
+  letter-spacing: $letter-spacing-wide;
+  text-transform: uppercase;
 }
 
 .product-card-button {
-  // text-transform: uppercase;
   position: absolute;
   bottom: -100%;
   font-size: $font-small;
   transition: all 0.4s ease-in-out;
+  background: $vintage-brown !important;
+  color: $white !important;
+  border: none !important;
+  border-radius: 0 !important;
+  font-family: $font-accent;
+  letter-spacing: $letter-spacing-wide;
+  text-transform: uppercase;
+
+  &:hover {
+    background: $vintage-brown-dark !important;
+  }
 
   @include mobile {
     bottom: 0;
@@ -179,6 +260,12 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
+  filter: sepia(8%) contrast(1.02);
+  transition: filter 0.3s ease;
+
+  .product-card:hover & {
+    filter: sepia(0%) contrast(1);
+  }
 }
 
 .product-list-empty-filters {
@@ -210,8 +297,11 @@
 .product-modal {
   width: 100%;
   display: flex;
-  background: #fff;
-  border: 1px solid #e1e1e1;
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(139, 69, 19, 0.1);
 
   @include tablet {
     flex-direction: column;
@@ -221,11 +311,10 @@
 
 .product-modal-image-wrapper {
   width: 40rem;
-  // height: 40rem;
   height: inherit;
   flex-grow: 1;
   position: relative;
-  background: #f8f8f8;
+  background: $vintage-beige;
 
   @include mobile {
     width: 100%;
@@ -246,12 +335,13 @@
 .product-modal-image-collection {
   width: 150px;
   height: inherit;
-  background: #fff;
+  background: $white;
   display: flex;
   flex-direction: column;
   padding: 10px;
   overflow-y: scroll;
   position: relative;
+  border-right: 1px solid $border-color;
 
   @include tablet {
     width: 100%;
@@ -260,37 +350,45 @@
     overflow-x: scroll;
     overflow-y: unset;
     flex-direction: row;
+    border-right: none;
+    border-top: 1px solid $border-color;
   }
 }
 
 .product-modal-image-collection::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 .product-modal-image-collection::-webkit-scrollbar-thumb {
-  background-color: #1a1a1a;
-  outline: 1px solid #f8f8f8;
-  // border-radius: .6rem;
+  background-color: $vintage-brown;
+  border: 2px solid $white;
+  border-radius: 4px;
 }
 
 .product-modal-image-collection::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.2);
+  background: $vintage-beige;
 }
 
 .product-modal-image-collection-wrapper {
   width: 100%;
   height: 100px;
-  border: 1px solid #e1e1e1;
-  margin-bottom: 5px;
+  border: 2px solid $border-color;
+  margin-bottom: 8px;
   position: relative;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+  overflow: hidden;
 
   &:hover {
     cursor: pointer;
-    background: #fff;
+    border-color: $vintage-gold;
   }
+
   @include tablet {
     order: 1;
     width: 100px;
+    margin-right: 8px;
+    margin-bottom: 0;
   }
 }
 
@@ -309,6 +407,13 @@
 .product-modal-details {
   width: 500px;
   padding: $l-size;
+  background: $white;
+
+  h2 {
+    font-family: $font-heading;
+    color: $heading-color;
+    margin-bottom: 1rem;
+  }
 
   @include tablet {
     width: 100%;
@@ -321,9 +426,11 @@
 .product-modal-action {
   display: flex;
   margin-top: $m-size;
+  gap: 1rem;
 
   @include mobile {
     justify-content: center;
+    flex-direction: column;
 
     button {
       width: 100%;
@@ -336,8 +443,6 @@
 .product-form {
   width: 100%;
   display: flex;
-  // grid-template-columns: repeat(3, 1fr);
-  // grid-gap: $s-size;
 }
 
 .product-form-field {
@@ -361,8 +466,14 @@
   width: 100%;
   height: 200px;
   position: relative;
-  background: #f4f4f4;
-  border: 1px solid #cacaca;
+  background: $vintage-beige;
+  border: 2px dashed $border-color;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: $vintage-gold;
+  }
 }
 
 .product-form-collection {
@@ -371,7 +482,7 @@
 }
 
 .product-form-delete-image {
-  color: red;
+  color: $vintage-rust;
   border: none;
   background: none;
   position: absolute;
@@ -379,11 +490,11 @@
   right: -10px;
 
   &:hover {
-    color: darken(red, 10%);
+    color: darken($vintage-rust, 10%);
   }
 
   i {
-    background: #fff;
+    background: $white;
     border-radius: 50%;
   }
 }
@@ -394,8 +505,9 @@
   position: relative;
   display: inline-block;
   margin: 10px;
-  background: #f4f4f4;
-  border: 1px solid #cacaca;
+  background: $vintage-beige;
+  border: 1px solid $border-color;
+  border-radius: 4px;
 
   img {
     width: 100%;
@@ -411,8 +523,6 @@
 }
 
 // PRODUCT SEARCH ------------------
-//
-
 .product-search {
   width: 100%;
   position: relative;
@@ -428,10 +538,11 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 $m-size;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 5px 15px rgba(139, 69, 19, 0.05);
   position: sticky;
   top: 0;
   z-index: map-get($z-index, "navigation");
+  border-bottom: 1px solid $border-color;
 }
 
 .product-search-body {
@@ -443,8 +554,9 @@
   width: 100%;
   border: none !important;
   flex-grow: 1;
-  background: $background-color-01;
+  background: $vintage-beige;
   font-size: $font-medium !important;
+  font-family: $font-body;
 
   &:focus {
     border: none !important;
@@ -470,7 +582,9 @@
 
   h5 {
     flex-grow: 1;
+    font-family: $font-heading;
   }
+
   h5:last-child {
     text-align: right;
   }
@@ -492,6 +606,7 @@
     padding: $m-size;
     background: $white;
     z-index: 5;
+    border-top: 1px solid $border-color;
   }
 }
 
@@ -500,15 +615,32 @@
   margin-bottom: $s-size;
 }
 
-// ---------------------------- FEATURED & RECOMMENDED PRODUCTS ----------------------------
+// ---------------------------- VINTAGE FEATURED & RECOMMENDED PRODUCTS ----------------------------
 .display {
   margin: 8rem auto;
   max-width: 1400px;
   padding: 0 2rem;
+  position: relative;
+
+  // Decorative side elements
+  &::before {
+    content: '✦';
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $vintage-gold;
+    font-size: 1.5rem;
+    opacity: 0.5;
+  }
 
   @include mobile {
     margin: 4rem auto;
     padding: 0 1rem;
+
+    &::before {
+      display: none;
+    }
   }
 }
 
@@ -516,36 +648,43 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid $border-color;
 
   h1 {
-    font-size: 2.8rem;
-    font-weight: 600;
+    font-size: 3.2rem;
+    font-weight: 700;
+    font-family: $font-heading;
+    color: $heading-color;
     position: relative;
 
     &:after {
       content: "";
       position: absolute;
-      bottom: -10px;
+      bottom: -15px;
       left: 0;
-      width: 60px;
+      width: 80px;
       height: 3px;
-      background: #2196f3;
+      background: linear-gradient(90deg, $vintage-gold, transparent);
     }
   }
 
   a {
     text-decoration: none;
-    font-size: 1.6rem;
-    color: #2196f3;
-    padding: 0.8rem 1.6rem;
-    border: 2px solid #2196f3;
-    border-radius: 25px;
+    font-size: 1.5rem;
+    font-family: $font-accent;
+    color: $vintage-brown;
+    padding: 1rem 2rem;
+    border: 2px solid $vintage-brown;
+    border-radius: 4px;
     transition: all 0.3s ease;
+    letter-spacing: $letter-spacing-wide;
+    text-transform: uppercase;
 
     &:hover {
-      background: #2196f3;
-      color: white;
+      background: $vintage-brown;
+      color: $white;
     }
   }
 }
@@ -554,48 +693,50 @@
   width: 100%;
   height: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
   grid-gap: 3rem;
 
   @include mobile {
-    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
     grid-gap: 2rem;
   }
 }
 
+// Vintage Product Display Card
 .product-display {
   width: 100%;
-  max-height: 45rem;
-  border-radius: 16px;
+  max-height: 50rem;
+  border-radius: 8px;
   overflow: hidden;
-  background: white;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  background: $white;
+  border: 1px solid $border-color;
+  box-shadow: 0 8px 30px rgba(139, 69, 19, 0.08);
   transition: all 0.4s ease;
   position: relative;
 
   &:hover {
     cursor: pointer;
-    transform: translateY(-8px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(139, 69, 19, 0.15);
+    border-color: $vintage-gold;
 
     .product-display-img img {
-      transform: scale(1.08);
+      transform: scale(1.05);
+      filter: sepia(0%);
     }
 
     .product-display-details {
-      background: linear-gradient(
-        to bottom,
-        rgba(255, 255, 255, 0.9),
-        rgba(255, 255, 255, 1)
-      );
+      background: linear-gradient(to bottom,
+          rgba(253, 248, 243, 0.9),
+          $white );
     }
   }
 }
 
 .product-display-img {
   width: 100%;
-  height: 28rem;
-  background: #f9f9f9;
+  height: 30rem;
+  background: $vintage-beige;
   position: relative;
   overflow: hidden;
 
@@ -603,26 +744,29 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    filter: sepia(10%);
   }
 
-  // Badge styles
+  // Vintage Badge
   &:before {
-    content: attr(data-tag); // Sử dụng data attribute để linh hoạt nội dung
+    content: attr(data-tag);
     position: absolute;
     top: 2rem;
-    right: 2rem; // Đổi vị trí sang bên phải
-    background: #2196f3;
-    color: white;
+    right: 2rem;
+    background: $vintage-gold;
+    color: $white;
     padding: 0.8rem 1.6rem;
-    border-radius: 25px;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
+    font-family: $font-accent;
     font-weight: 600;
+    letter-spacing: $letter-spacing-wide;
+    text-transform: uppercase;
     z-index: 1;
-    box-shadow: 0 4px 8px rgba(33, 150, 243, 0.3);
+    box-shadow: 0 4px 15px rgba(196, 163, 90, 0.4);
   }
 
-  // Thêm overlay effect
+  // Vintage overlay
   &:after {
     content: "";
     position: absolute;
@@ -630,25 +774,25 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-      to bottom,
-      transparent 50%,
-      rgba(0, 0, 0, 0.05)
-    );
+    background: linear-gradient(135deg,
+        rgba(139, 69, 19, 0.03) 0%,
+        transparent 50%,
+        rgba(0, 0, 0, 0.05) 100%);
     pointer-events: none;
   }
 }
 
 .product-display-details {
   padding: 2.5rem;
-  background: white;
+  background: $white;
   transition: all 0.3s ease;
 
   h2 {
     margin: 0;
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: 600;
-    color: #2c3e50;
+    font-family: $font-heading;
+    color: $heading-color;
     line-height: 1.4;
     margin-bottom: 1.2rem;
     display: -webkit-box;
@@ -665,30 +809,33 @@
   }
 
   .price {
-    font-size: 2.4rem;
+    font-size: 2.6rem;
     font-weight: 700;
-    color: #e74c3c;
+    font-family: $font-heading;
+    color: $vintage-rust;
     display: flex;
     align-items: center;
     gap: 1rem;
 
     .original-price {
       font-size: 1.6rem;
-      color: #95a5a6;
+      color: $gray-20;
       text-decoration: line-through;
     }
   }
 
   .category {
     display: inline-block;
-    font-size: 1.3rem;
-    color: #7f8c8d;
+    font-size: 1.2rem;
+    font-family: $font-accent;
+    color: $vintage-gold;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    background: #f8f9fa;
-    padding: 0.6rem 1.2rem;
-    border-radius: 15px;
+    letter-spacing: $letter-spacing-wider;
+    background: rgba($vintage-gold, 0.1);
+    padding: 0.6rem 1.4rem;
+    border-radius: 4px;
     margin-bottom: 1rem;
+    border: 1px solid rgba($vintage-gold, 0.3);
   }
 
   .rating {
@@ -698,12 +845,12 @@
     margin-top: 1.5rem;
 
     .stars {
-      color: #f1c40f;
+      color: $vintage-gold;
       font-size: 1.6rem;
     }
 
     .count {
-      color: #95a5a6;
+      color: $gray-10;
       font-size: 1.4rem;
       font-weight: 500;
     }
@@ -711,12 +858,12 @@
     .divider {
       width: 4px;
       height: 4px;
-      background: #e0e0e0;
+      background: $border-color;
       border-radius: 50%;
     }
 
     .stock {
-      color: #27ae60;
+      color: $vintage-olive;
       font-size: 1.4rem;
       font-weight: 500;
     }
@@ -730,30 +877,43 @@
 
     button {
       flex: 1;
-      padding: 1.2rem;
-      border-radius: 8px;
-      font-size: 1.5rem;
+      padding: 1.4rem;
+      border-radius: 4px;
+      font-size: 1.4rem;
       font-weight: 600;
+      font-family: $font-accent;
+      letter-spacing: $letter-spacing-wide;
+      text-transform: uppercase;
       transition: all 0.3s ease;
 
       &.add-to-cart {
-        background: #2196f3;
-        color: white;
-        border: none;
+        background: $vintage-brown;
+        color: $white;
+        border: 2px solid $vintage-brown;
 
         &:hover {
-          background: darken(#2196f3, 10%);
+          background: $vintage-brown-dark;
+          border-color: $vintage-brown-dark;
+        }
+
+        &::before {
+          display: none;
         }
       }
 
       &.wishlist {
-        border: 2px solid #e0e0e0;
+        border: 2px solid $border-color;
         background: transparent;
-        color: #2c3e50;
+        color: $vintage-brown;
 
         &:hover {
-          border-color: #2196f3;
-          color: #2196f3;
+          border-color: $vintage-gold;
+          color: $vintage-gold;
+          background: rgba($vintage-gold, 0.05);
+        }
+
+        &::before {
+          display: none;
         }
       }
     }
@@ -767,18 +927,18 @@
   }
 
   .product-display-img {
-    height: 22rem;
+    height: 24rem;
   }
 
   .product-display-details {
-    padding: 1.5rem;
+    padding: 1.8rem;
 
     h2 {
-      font-size: 1.8rem;
+      font-size: 1.9rem;
     }
 
     .price {
-      font-size: 2rem;
+      font-size: 2.2rem;
     }
 
     .action-row {
@@ -791,16 +951,17 @@
   }
 }
 
-// Thêm animation cho loading state
+// Vintage Loading Skeleton
 .product-display-skeleton {
-  background: #f8f8f8;
-  border-radius: 12px;
+  background: $vintage-beige;
+  border-radius: 8px;
   overflow: hidden;
+  border: 1px solid $border-color;
 
   .skeleton-img {
     width: 100%;
-    height: 25rem;
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    height: 28rem;
+    background: linear-gradient(90deg, $vintage-beige 25%, darken($vintage-beige, 5%) 50%, $vintage-beige 75%);
     background-size: 200% 100%;
     animation: loading 1.5s infinite;
   }
@@ -808,9 +969,10 @@
   .skeleton-text {
     height: 2rem;
     margin: 1rem 2rem;
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background: linear-gradient(90deg, $vintage-beige 25%, darken($vintage-beige, 5%) 50%, $vintage-beige 75%);
     background-size: 200% 100%;
     animation: loading 1.5s infinite;
+    border-radius: 4px;
   }
 }
 
@@ -818,7 +980,20 @@
   0% {
     background-position: 200% 0;
   }
+
   100% {
     background-position: -200% 0;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

@@ -4,10 +4,10 @@ import { ACCOUNT } from '@/constants/routes';
 import { Field, useFormikContext } from 'formik';
 import PropType from 'prop-types';
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const EditForm = ({ isLoading, authProvider }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { values, submitForm } = useFormikContext();
 
   return (
@@ -49,7 +49,7 @@ const EditForm = ({ isLoading, authProvider }) => {
         <button
           className="button button-muted w-100-mobile"
           disabled={isLoading}
-          onClick={() => history.push(ACCOUNT)}
+          onClick={() => navigate(ACCOUNT)}
           type="button"
         >
           <ArrowLeftOutlined />

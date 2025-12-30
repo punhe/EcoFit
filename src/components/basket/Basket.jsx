@@ -6,7 +6,7 @@ import { calculateTotal, formatVND } from '@/helpers/utils';
 import { useDidMount, useModal } from '@/hooks';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { clearBasket } from '@/redux/actions/basketActions';
 
 const Basket = () => {
@@ -15,7 +15,7 @@ const Basket = () => {
     basket: state.basket,
     user: state.auth
   }));
-  const history = useHistory();
+  const navigate = useNavigate();
   const { pathname } = useLocation();
   const dispatch = useDispatch();
   const didMount = useDidMount();
@@ -29,17 +29,17 @@ const Basket = () => {
   const onCheckOut = () => {
     if (basket.length !== 0 && user) {
       document.body.classList.remove('is-basket-open');
-      history.push(CHECKOUT);
+      navigate(CHECKOUT);
     } else if (!user) {
       document.body.classList.remove('is-basket-open');
-      history.push(SIGNIN);
+      navigate(SIGNIN);
     }
   };
 
   const onSignInClick = () => {
     onCloseModal();
     document.body.classList.remove('is-basket-open');
-    history.push(SIGNIN);
+    navigate(SIGNIN);
   };
 
   const onClearBasket = () => {
