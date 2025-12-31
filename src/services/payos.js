@@ -2,6 +2,19 @@ const PAYOS_CLIENT_ID = import.meta.env.VITE_PAYOS_CLIENT_ID;
 const PAYOS_API_KEY = import.meta.env.VITE_PAYOS_API_KEY;
 const PAYOS_CHECKSUM_KEY = import.meta.env.VITE_PAYOS_CHECKSUM_KEY;
 
+// Debug: Check if env variables are loaded
+console.log('PayOS Config Loaded:', {
+  hasClientId: !!PAYOS_CLIENT_ID,
+  hasApiKey: !!PAYOS_API_KEY,
+  hasChecksumKey: !!PAYOS_CHECKSUM_KEY,
+  checksumKeyLength: PAYOS_CHECKSUM_KEY?.length || 0
+});
+
+// Validate required keys
+if (!PAYOS_CHECKSUM_KEY) {
+  console.error('VITE_PAYOS_CHECKSUM_KEY is not set in environment variables!');
+}
+
 // Function to convert string to hex
 const stringToHex = (str) => {
   return Array.from(str)
@@ -19,16 +32,16 @@ const generateSignature = async (data) => {
       orderCode: data.orderCode,
       returnUrl: data.returnUrl
     };
-    
+
     // Sort keys alphabetically and create query string
     const sortedKeys = Object.keys(signData).sort();
     const signString = sortedKeys.map(key => `${key}=${signData[key]}`).join('&');
-    
+
     // Convert strings to Uint8Array
     const encoder = new TextEncoder();
     const message = encoder.encode(signString);
     const key = encoder.encode(PAYOS_CHECKSUM_KEY);
-    
+
     // Import key for HMAC
     const cryptoKey = await window.crypto.subtle.importKey(
       'raw',
@@ -40,14 +53,14 @@ const generateSignature = async (data) => {
       false,
       ['sign']
     );
-    
+
     // Generate signature
     const signature = await window.crypto.subtle.sign(
       'HMAC',
       cryptoKey,
       message
     );
-    
+
     // Convert to hex string
     return Array.from(new Uint8Array(signature))
       .map(b => b.toString(16).padStart(2, '0'))
@@ -110,12 +123,12 @@ export const createPayment = async (orderInfo) => {
 
     const data = await response.json();
     console.log('PayOS Response:', data);
-    
+
     if (!response.ok) {
       console.error('PayOS API Error:', data);
       throw new Error(data.desc || 'Lỗi khi tạo thanh toán');
     }
-    
+
     if (data.code === '00' && data.data?.checkoutUrl) {
       return {
         success: true,
