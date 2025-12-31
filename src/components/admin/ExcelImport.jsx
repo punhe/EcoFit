@@ -35,8 +35,8 @@ const ExcelImport = () => {
       ghi_chu: 'Có vết phai nhẹ ở cổ áo',
       noi_bat: true,
       de_xuat: false,
-      link_anh: 'https://example.com/image1.jpg',
-      link_anh_phu: 'https://example.com/image2.jpg, https://example.com/image3.jpg'
+      link_anh: 'https://via.placeholder.com/400x400/F5F5DC/8B4513?text=Ao+So+Mi',
+      link_anh_phu: 'https://via.placeholder.com/400x400/F5F5DC/8B4513?text=Detail+1, https://via.placeholder.com/400x400/F5F5DC/8B4513?text=Detail+2'
     },
     {
       ten_san_pham: 'Quần jeans Levis 501',
@@ -54,7 +54,7 @@ const ExcelImport = () => {
       ghi_chu: 'Có vết sờn nhẹ ở gấu',
       noi_bat: false,
       de_xuat: true,
-      link_anh: 'https://example.com/jeans1.jpg',
+      link_anh: 'https://via.placeholder.com/400x400/F5F5DC/8B4513?text=Jeans+Levis',
       link_anh_phu: ''
     },
     {
@@ -73,8 +73,8 @@ const ExcelImport = () => {
       ghi_chu: '',
       noi_bat: true,
       de_xuat: true,
-      link_anh: 'https://example.com/coach1.jpg',
-      link_anh_phu: 'https://example.com/coach2.jpg'
+      link_anh: 'https://via.placeholder.com/400x400/F5F5DC/8B4513?text=Tui+Coach',
+      link_anh_phu: 'https://via.placeholder.com/400x400/F5F5DC/8B4513?text=Coach+Detail'
     }
   ];
 

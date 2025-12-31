@@ -5,11 +5,21 @@ import React, { useState } from 'react';
 const ImageLoader = ({ src, alt, className }) => {
   const loadedImages = {};
   const [loaded, setLoaded] = useState(loadedImages[src]);
+  const [error, setError] = useState(false);
 
   const onLoad = () => {
     loadedImages[src] = true;
     setLoaded(true);
+    setError(false);
   };
+
+  const onError = () => {
+    setLoaded(true);
+    setError(true);
+  };
+
+  // Fallback placeholder image
+  const fallbackSrc = 'https://via.placeholder.com/400x400/F5F5DC/8B4513?text=No+Image';
 
   return (
     <>
@@ -23,7 +33,8 @@ const ImageLoader = ({ src, alt, className }) => {
         alt={alt || ''}
         className={`${className || ''} ${loaded ? 'is-img-loaded' : 'is-img-loading'}`}
         onLoad={onLoad}
-        src={src}
+        onError={onError}
+        src={error ? fallbackSrc : src}
       />
     </>
   );

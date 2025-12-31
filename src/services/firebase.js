@@ -117,9 +117,15 @@ class Firebase {
 
             const snapshot = await query.get();
             const products = [];
-            snapshot.forEach((doc) =>
-              products.push({ id: doc.id, ...doc.data() })
-            );
+            snapshot.forEach((doc) => {
+              const data = doc.data();
+              products.push({
+                id: doc.id,
+                ...data,
+                // Ensure image field exists (map from imageUrl if needed)
+                image: data.image || data.imageUrl
+              });
+            });
             const lastKey = snapshot.docs[snapshot.docs.length - 1];
 
             resolve({ products, lastKey });
@@ -144,9 +150,15 @@ class Firebase {
             clearTimeout(timeout);
             if (!didTimeout) {
               const products = [];
-              snapshot.forEach((doc) =>
-                products.push({ id: doc.id, ...doc.data() })
-              );
+              snapshot.forEach((doc) => {
+                const data = doc.data();
+                products.push({
+                  id: doc.id,
+                  ...data,
+                  // Ensure image field exists (map from imageUrl if needed)
+                  image: data.image || data.imageUrl
+                });
+              });
               const lastKey = snapshot.docs[snapshot.docs.length - 1];
 
               resolve({ products, lastKey, total });
@@ -194,14 +206,24 @@ class Firebase {
 
             if (!nameSnaps.empty) {
               nameSnaps.forEach((doc) => {
-                searchedNameProducts.push({ id: doc.id, ...doc.data() });
+                const data = doc.data();
+                searchedNameProducts.push({
+                  id: doc.id,
+                  ...data,
+                  image: data.image || data.imageUrl
+                });
               });
               lastKey = nameSnaps.docs[nameSnaps.docs.length - 1];
             }
 
             if (!keywordsSnaps.empty) {
               keywordsSnaps.forEach((doc) => {
-                searchedKeywordsProducts.push({ id: doc.id, ...doc.data() });
+                const data = doc.data();
+                searchedKeywordsProducts.push({
+                  id: doc.id,
+                  ...data,
+                  image: data.image || data.imageUrl
+                });
               });
             }
 
