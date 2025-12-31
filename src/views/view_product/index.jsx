@@ -51,6 +51,10 @@ const ViewProduct = () => {
   const handleAddToBasket = () => {
     addToBasket({
       ...product,
+      // Ensure price is a valid number
+      price: Number(product.price) || 0,
+      // Set initial quantity to 1
+      quantity: 1,
       selectedColor,
       selectedSize: selectedSize || product.sizes[0],
     });
@@ -131,8 +135,8 @@ const ViewProduct = () => {
               <div className="product-modal-action">
                 <button
                   className={`button button-small ${isItemOnBasket(product.id)
-                      ? "button-border button-border-gray"
-                      : ""
+                    ? "button-border button-border-gray"
+                    : ""
                     }`}
                   onClick={handleAddToBasket}
                   type="button"

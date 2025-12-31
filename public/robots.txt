@@ -1,0 +1,13 @@
+# Robots.txt for EcoFit
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /checkout/
+Disallow: /account/
+
+# Sitemap location
+Sitemap: https://ecofit.vn/sitemap.xml
+
+# Crawl-delay (optional, in seconds)
+Crawl-delay: 1

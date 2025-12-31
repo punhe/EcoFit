@@ -18,5 +18,30 @@ export default defineConfig({
   },
   css: {
     postcss: './postcss.config.js'
+  },
+  build: {
+    // Performance optimizations
+    target: 'es2015',
+    minify: 'esbuild', // Use built-in esbuild for faster builds
+    // Code splitting
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // Vendor chunks for better caching
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'redux-vendor': ['redux', 'react-redux', 'redux-saga'],
+          'firebase-vendor': ['firebase/app', 'firebase/auth', 'firebase/firestore'],
+          'ui-vendor': ['@nextui-org/react', '@ant-design/icons'],
+        }
+      }
+    },
+    // Chunk size warnings
+    chunkSizeWarningLimit: 1000,
+    // Source maps for debugging (optional, remove for smaller builds)
+    sourcemap: false
+  },
+  // Optimize dependencies
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react-router-dom', 'redux', 'react-redux']
   }
 })
