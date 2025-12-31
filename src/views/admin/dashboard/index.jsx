@@ -18,6 +18,14 @@ const Dashboard = () => {
   useScrollTop();
 
   const profile = useSelector((state) => state.profile);
+  const products = useSelector((state) => state.products.items);
+  const basket = useSelector((state) => state.basket);
+
+  // Calculate statistics
+  const totalProducts = products.length;
+  const totalOrders = basket.length; // This would be from orders collection in real app
+  const totalCustomers = 0; // Would need to fetch from users collection
+  const totalRevenue = basket.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
   const menuItems = [
     {
@@ -82,7 +90,7 @@ const Dashboard = () => {
             <ShopOutlined />
           </div>
           <div className="stat-info">
-            <span className="stat-value">--</span>
+            <span className="stat-value">{totalProducts}</span>
             <span className="stat-label">Sản phẩm</span>
           </div>
         </div>
@@ -91,7 +99,7 @@ const Dashboard = () => {
             <ShoppingCartOutlined />
           </div>
           <div className="stat-info">
-            <span className="stat-value">--</span>
+            <span className="stat-value">{totalOrders}</span>
             <span className="stat-label">Đơn hàng</span>
           </div>
         </div>
@@ -100,7 +108,7 @@ const Dashboard = () => {
             <UserOutlined />
           </div>
           <div className="stat-info">
-            <span className="stat-value">--</span>
+            <span className="stat-value">{totalCustomers}</span>
             <span className="stat-label">Khách hàng</span>
           </div>
         </div>
@@ -109,7 +117,7 @@ const Dashboard = () => {
             <BarChartOutlined />
           </div>
           <div className="stat-info">
-            <span className="stat-value">--</span>
+            <span className="stat-value">{totalRevenue.toLocaleString('vi-VN')}đ</span>
             <span className="stat-label">Doanh thu</span>
           </div>
         </div>
