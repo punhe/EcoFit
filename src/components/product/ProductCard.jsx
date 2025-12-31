@@ -45,8 +45,8 @@ const ProductCard = ({ product, isLoading }) => {
   }
 
   return (
-    <Card 
-      className="w-full hover:scale-105 transition-transform duration-200" 
+    <Card
+      className="w-full hover:scale-105 transition-transform duration-200"
       shadow="sm"
       isPressable
       onPress={() => window.location.href = `/product/${product.id}`}
@@ -58,7 +58,7 @@ const ProductCard = ({ product, isLoading }) => {
           width="100%"
           alt={product.name}
           className="w-full object-cover h-[200px]"
-          src={product.image}
+          src={product.image || product.imageUrl || 'https://via.placeholder.com/200?text=No+Image'}
         />
       </CardBody>
       <CardFooter className="text-small flex flex-col items-start gap-2 p-4">
