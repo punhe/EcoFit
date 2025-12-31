@@ -20,7 +20,13 @@ const useProduct = (id) => {
           const doc = await firebase.getSingleProduct(id);
 
           if (doc.exists) {
-            const data = { ...doc.data(), id: doc.ref.id };
+            const docData = doc.data();
+            const data = {
+              ...docData,
+              id: doc.ref.id,
+              // Ensure image field exists (map from imageUrl if needed)
+              image: docData.image || docData.imageUrl
+            };
 
             if (didMount) {
               setProduct(data);

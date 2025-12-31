@@ -25,7 +25,12 @@ const useFeaturedProducts = (itemsCount) => {
 
         docs.forEach((snap) => {
           const data = snap.data();
-          items.push({ id: snap.ref.id, ...data });
+          items.push({
+            id: snap.ref.id,
+            ...data,
+            // Ensure image field exists (map from imageUrl if needed)
+            image: data.image || data.imageUrl
+          });
         });
 
         if (didMount) {
