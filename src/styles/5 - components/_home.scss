@@ -472,13 +472,13 @@
 
 .vintage-hero-badge {
   display: inline-block;
-  padding: 1rem 2.5rem;
+  padding: 1.2rem 2.8rem;
   background: rgba($vintage-gold, 0.2);
   color: $vintage-brown;
-  font-family: $font-typewriter;
-  font-size: 1.3rem;
-  font-weight: 600;
-  letter-spacing: $letter-spacing-wider;
+  font-family: $font-heading; // Changed from typewriter for Vietnamese support
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: $letter-spacing-wide;
   border-radius: 0;
   margin-bottom: 2rem;
   border: 2px solid $vintage-gold;
@@ -500,6 +500,8 @@
     color: $vintage-brown;
     position: relative;
     font-style: italic;
+    font-size: 1.15em; // Slightly larger than surrounding text
+    font-weight: 800;
 
     &::after {
       content: '';
@@ -507,7 +509,7 @@
       bottom: 8px;
       left: 0;
       right: 0;
-      height: 14px;
+      height: 16px;
       background: rgba($vintage-gold, 0.5);
       z-index: -1;
       transform: skew(-5deg);
@@ -937,20 +939,20 @@
 .floating-badge {
   position: absolute;
   background: $white;
-  padding: 1rem 1.8rem;
+  padding: 1.2rem 2rem;
   border-radius: 0;
-  font-family: $font-typewriter;
-  font-size: 1.2rem;
-  font-weight: 600;
+  font-family: $font-heading; // Changed from typewriter for Vietnamese support
+  font-size: 1.4rem;
+  font-weight: 700;
   color: $vintage-brown;
   border: 2px solid $vintage-gold;
   box-shadow: 3px 3px 0 $vintage-worn;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
   z-index: 10;
   text-transform: uppercase;
-  letter-spacing: $letter-spacing-wide;
+  letter-spacing: $letter-spacing-normal;
 
   &.badge-1 {
     top: 20%;
