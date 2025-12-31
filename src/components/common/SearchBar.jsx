@@ -26,7 +26,7 @@ const SearchBar = () => {
     if (e.keyCode === 13) {
       // dispatch(setTextFilter(searchInput));
       e.target.blur();
-      searchbarRef.current.classList.remove('is-open-recent-search');
+      searchbarRef.current?.classList.remove('is-open-recent-search');
 
       if (isMobile) {
         navigate('/');
@@ -40,7 +40,7 @@ const SearchBar = () => {
     const searchBar = e.target.closest('.searchbar');
 
     if (!searchBar) {
-      searchbarRef.current.classList.remove('is-open-recent-search');
+      searchbarRef.current?.classList.remove('is-open-recent-search');
       document.removeEventListener('click', recentSearchClickHandler);
     }
   };
@@ -49,14 +49,14 @@ const SearchBar = () => {
     e.target.select();
 
     if (filter.recent.length !== 0) {
-      searchbarRef.current.classList.add('is-open-recent-search');
+      searchbarRef.current?.classList.add('is-open-recent-search');
       document.addEventListener('click', recentSearchClickHandler);
     }
   };
 
   const onClickRecentSearch = (keyword) => {
     // dispatch(setTextFilter(keyword));
-    searchbarRef.current.classList.remove('is-open-recent-search');
+    searchbarRef.current?.classList.remove('is-open-recent-search');
     navigate(`/search/${keyword.trim().toLowerCase()}`);
   };
 
