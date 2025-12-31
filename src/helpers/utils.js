@@ -28,9 +28,14 @@ export const displayMoney = (n) => {
 export const calculateTotal = (arr) => {
   if (!arr || arr?.length === 0) return 0;
 
-  const total = arr.reduce((acc, val) => acc + val, 0);
+  const total = arr.reduce((acc, val) => {
+    // Ensure we're adding valid numbers
+    const numVal = Number(val) || 0;
+    return acc + numVal;
+  }, 0);
 
-  return total.toFixed(2);
+  // Return number, not string
+  return Math.round(total);
 };
 
 export const displayActionMessage = (msg, status = 'info') => {
@@ -66,10 +71,13 @@ export const displayActionMessage = (msg, status = 'info') => {
 };
 
 export const formatVND = (price) => {
+  // Handle NaN, null, undefined
+  const numPrice = Number(price) || 0;
+
   const formatted = new Intl.NumberFormat('vi-VN', {
     style: 'decimal',
     minimumFractionDigits: 0,
     maximumFractionDigits: 0
-  }).format(price);
+  }).format(numPrice);
   return `${formatted} VND`;
 };
