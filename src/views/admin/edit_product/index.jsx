@@ -21,7 +21,7 @@ const EditProduct = () => {
 
   return (
     <div className="product-form-container">
-      {error && <Navigate to="/dashboard/products" replace />}
+      {error && <Navigate to="/admin/products" replace />}
       <h2>Edit Product</h2>
       {product && (
         <Suspense fallback={(

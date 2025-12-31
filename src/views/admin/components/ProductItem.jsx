@@ -14,7 +14,7 @@ const ProductItem = ({ product }) => {
   const productRef = useRef(null);
 
   const onClickEdit = () => {
-    navigate(`${EDIT_PRODUCT}/${product.id}`);
+    navigate(EDIT_PRODUCT.replace(':id', product.id));
   };
 
   const onDeleteProduct = () => {
@@ -42,11 +42,11 @@ const ProductItem = ({ product }) => {
       >
         <div className="grid grid-count-6">
           <div className="grid-col item-img-wrapper">
-            {product.image ? (
+            {(product.image || product.imageUrl) ? (
               <ImageLoader
                 alt={product.name}
                 className="item-img"
-                src={product.image}
+                src={product.image || product.imageUrl}
               />
             ) : <Skeleton width={50} height={30} />}
           </div>
