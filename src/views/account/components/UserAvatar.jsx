@@ -36,7 +36,7 @@ const UserNav = () => {
   }, []);
 
   const onClickNav = () => {
-    userNav.current.classList.toggle('user-sub-open');
+    userNav.current?.classList.toggle('user-sub-open');
   };
 
   return isAuthenticating ? (

@@ -26,7 +26,8 @@ const Navigation = () => {
   }));
 
   const scrollHandler = () => {
-    if (navbar.current && window.screen.width > 480) {
+    // Check if navbar.current exists and has classList before accessing it
+    if (navbar.current?.classList && window.screen.width > 480) {
       if (window.pageYOffset >= 70) {
         navbar.current.classList.add('is-nav-scrolled');
       } else {
