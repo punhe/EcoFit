@@ -272,6 +272,7 @@ const ExcelImport = () => {
               price: Number(row.gia_ban),
               description: fullDescription,
               maxQuantity: row.so_luong ? Number(row.so_luong) : 1,
+              dateAdded: Date.now(), // Add timestamp for when product was imported
               isFeatured: row.noi_bat === true || row.noi_bat === 'true' || row.noi_bat === 'TRUE',
               isRecommended: row.de_xuat === true || row.de_xuat === 'true' || row.de_xuat === 'TRUE',
               keywords: [...new Set(keywords)], // Remove duplicates

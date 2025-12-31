@@ -69,8 +69,8 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
     isFeatured: product?.isFeatured || false,
     isRecommended: product?.isRecommended || false,
     availableColors: product?.availableColors || [],
-    image: product?.image || "",
-    imageCollection: product?.imageCollection || [],
+    image: product?.image || product?.imageUrl || "",
+    imageCollection: product?.imageCollection?.map(img => img.url || img) || [],
   };
 
   const onSubmitForm = (form) => {
